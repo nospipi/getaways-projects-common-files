@@ -196,6 +196,12 @@ const productsSchema = new Schema({
   corresponding_schedule_task: { type: Object, default: {} }, // -
 });
 
+const meetingPointSchema = new Schema({
+  name: { type: String, required: true, default: "" },
+  latitude: { type: Number, required: true, default: 0.0 },
+  longitude: { type: Number, required: true, default: 0.0 },
+});
+
 const bookingSchema = new Schema(
   {
     ref: { type: String, default: "" }, //regiondo  === items[0].external_id
@@ -241,12 +247,6 @@ todoSchema.plugin(mongoosePaginate);
 
 const channelsSchema = new Schema({
   title: { type: String, required: true },
-});
-
-const meetingPointSchema = new Schema({
-  name: { type: String, required: true, default: "" },
-  latitude: { type: Number, required: true, default: 0.0 },
-  longitude: { type: Number, required: true, default: 0.0 },
 });
 
 const appVersionSchema = new Schema({
