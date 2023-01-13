@@ -11,7 +11,12 @@ const activitySchema = new Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-
+  platform_product_name: {
+    type: String,
+  },
+  product_id: {
+    type: String,
+  },
   crewGroups: {
     type: Array,
     required: true,
@@ -187,19 +192,30 @@ const requestSchema = new Schema({
   created_at: { type: Date, default: Date.now },
 });
 
-const productsSchema = new Schema({
-  title: { type: String, required: true },
-  product_code: { type: String, required: true },
-  time_slots: { type: Array, required: true },
-  pricing_options: { type: Array, required: true },
-  compatible_billing_codes: { type: Array, required: true }, // all corresponding billing ids
-  corresponding_schedule_task: { type: Object, default: {} }, // -
-});
+const productsSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    product_code: { type: String, required: true },
+    coordinates: { type: Object },
+    address: { type: String },
+    img_url: { type: String },
+    platform_product_name: { type: String },
+    product_description: { type: String },
+    time_slots: { type: Array, required: true },
+    pricing_options: { type: Array, required: true },
+    compatible_billing_codes: { type: Array, required: true }, // all corresponding billing ids
+    crewGroups: { type: Array, default: [] },
+    crewRoles: { type: Array, default: [] },
+  },
+  {
+    minimize: false,
+  }
+);
 
 const meetingPointSchema = new Schema({
-  name: { type: String, required: true, default: "" },
-  latitude: { type: Number, required: true, default: 0.0 },
-  longitude: { type: Number, required: true, default: 0.0 },
+  name: { type: String, required: true },
+  latitude: { type: Number, required: true },
+  longitude: { type: Number, required: true },
 });
 
 const bookingSchema = new Schema(
