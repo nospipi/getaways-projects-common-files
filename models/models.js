@@ -3,6 +3,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 const { Schema, model } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
 const mongoosastic = require("mongoosastic");
+//npm install https://github.com/nospipi/getaways-projects-common-files.git
 
 const activitySchema = new Schema({
   type: {
