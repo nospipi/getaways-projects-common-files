@@ -3,7 +3,8 @@ const uniqueValidator = require("mongoose-unique-validator");
 const { Schema, model } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
 const mongoosastic = require("mongoosastic");
-//npm install https://github.com/nospipi/getaways-projects-common-files.git
+// npm install https://github.com/nospipi/getaways-projects-common-files.git
+// require("getaways-projects-common-files/models/models.js");
 
 const activitySchema = new Schema({
   type: {
@@ -111,6 +112,7 @@ const scheduleTaskSchema = new Schema(
     pickups: Array,
     details: String,
     author: { type: Object, required: true },
+    tour_info_url: String,
   },
   {
     minimize: false,
