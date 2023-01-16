@@ -240,7 +240,7 @@ const bookingSchema = new Schema(
     tickets: { type: Object, default: {} }, // items
     billing_codes: { type: Array, default: [] }, // -
     client_location: { type: String, default: "" }, // -
-    pickup_location: String, // -
+    pickup_location: meetingPointSchema, // -
     saved_pickup_location: String, // -
     pickup_time: { type: String, default: "" }, // -
     source: { type: String, required: true }, //
