@@ -5,6 +5,7 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const mongoosastic = require("mongoosastic");
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
+// npm install https://github.com/nospipi/getaways-projects-common-files
 
 const activitySchema = new Schema({
   type: {
@@ -216,7 +217,7 @@ const productsSchema = new Schema(
 );
 
 const meetingPointSchema = new Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, default: "" },
   latitude: { type: Number, required: true },
   longitude: { type: Number, required: true },
 });
