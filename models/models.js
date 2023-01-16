@@ -218,9 +218,9 @@ const productsSchema = new Schema(
 
 const meetingPointSchema = new Schema(
   {
-    name: { type: String, required: true, default: "" },
-    latitude: { type: Number, required: true },
-    longitude: { type: Number, required: true },
+    name: { type: String, default: "" },
+    latitude: { type: Number },
+    longitude: { type: Number },
   },
   {
     minimize: false,
