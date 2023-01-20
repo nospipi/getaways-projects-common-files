@@ -254,6 +254,7 @@ const bookingSchema = new Schema(
     planned: { type: Boolean, default: false }, // -
     billed: { type: Boolean, default: false }, // -
     updated_at: { type: Array, required: true }, // -
+    email_history: { type: Array, default: [] }, // -
   },
   {
     minimize: false,
