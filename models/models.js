@@ -104,23 +104,6 @@ userSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
 }); //https://www.npmjs.com/package/mongoose-unique-validator
 
-const scheduleTaskSchema = new Schema(
-  {
-    activity: { type: Object, required: true },
-    date: { type: Date, required: true },
-    crew: Object,
-    vehicle: Object,
-    pickups: Array,
-    details: String,
-    author: { type: Object, required: true },
-    tour_info_url: String,
-  },
-  {
-    minimize: false,
-    //allows to save empty objects in db
-  }
-);
-
 const frequentMeetingPointSchema = new Schema({
   name: String,
   frequency: Number,
@@ -230,11 +213,13 @@ const meetingPointSchema = new Schema(
 const bookingSchema = new Schema(
   {
     ref: { type: String, default: "" }, //regiondo  === items[0].external_id
-    booking_date: { type: String, required: true }, //regiondo  === created_at format to date
-    date: { type: String, required: true }, //regiondo  === event_date_time
-    product: { type: Object, required: true }, // lookup product_id in products collection
-    product_time_slot: { type: String, required: true }, //regiondo  === event_date_time format to time
-    client_name: { type: String, required: true }, //  contact_data.first_name + contact_data.last_name
+    booking_date: { type: String }, //regiondo  === created_at format to date
+    date: { type: String }, //regiondo  === event_date_time
+    product: { type: Object }, // lookup product_id in products collection
+    product_time_slot: { type: String }, //regiondo  === event_date_time format to time
+    name: { type: String, default: "" }, //for scheduleTask,for not breaking mobile app !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    count: { type: Number, default: 1 }, //for scheduleTask,for not breaking mobile app !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    client_name: { type: String }, //  contact_data.first_name + contact_data.last_name
     client_email: { type: String, default: "" }, // contact_data.email
     client_phone: { type: String, default: "" }, // contact_data.telephone
     tickets: { type: Object, default: {} }, // items
@@ -243,7 +228,7 @@ const bookingSchema = new Schema(
     pickup_location: meetingPointSchema, // -
     saved_pickup_location: String, // -
     pickup_time: { type: String, default: "" }, // -
-    source: { type: String, required: true }, //
+    source: { type: String }, //
     client_messaged: { type: Boolean, default: false }, // -
     client_response_status: { type: String, default: "PENDING" }, // -
     notes: { type: String, default: "" }, // -
@@ -253,7 +238,7 @@ const bookingSchema = new Schema(
     cancelled: { type: Boolean, default: false }, // -
     planned: { type: Boolean, default: false }, // -
     billed: { type: Boolean, default: false }, // -
-    updated_at: { type: Array, required: true }, // -
+    updated_at: { type: Array }, // -
     email_history: { type: Array, default: [] }, // -
   },
   {
@@ -263,6 +248,32 @@ const bookingSchema = new Schema(
 );
 bookingSchema.plugin(mongoosastic);
 bookingSchema.plugin(mongoosePaginate);
+
+const pickupSchema = new Schema({
+  meeting_point: String,
+  time: String,
+  details: String,
+  lat: Number,
+  lon: Number,
+  guests: [bookingSchema],
+});
+
+const scheduleTaskSchema = new Schema(
+  {
+    activity: { type: Object, required: true },
+    date: { type: Date, required: true },
+    crew: Object,
+    vehicle: Object,
+    pickups: [pickupSchema],
+    details: String,
+    author: { type: Object, required: true },
+    tour_info_url: String,
+  },
+  {
+    minimize: false,
+    //allows to save empty objects in db
+  }
+);
 
 const todoSchema = new Schema({
   body: { type: String, required: true },
