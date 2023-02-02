@@ -182,6 +182,7 @@ const requestSchema = new Schema({
 const productsSchema = new Schema(
   {
     title: { type: String, required: true },
+    type: { type: String },
     product_code: { type: String, required: true },
     coordinates: { type: Object },
     address: { type: String },
