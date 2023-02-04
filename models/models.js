@@ -250,13 +250,19 @@ const bookingSchema = new Schema(
 bookingSchema.plugin(mongoosastic);
 bookingSchema.plugin(mongoosePaginate);
 
+const taskGuestSchema = new Schema({
+  name: { type: String, default: "" },
+  count: { type: Number, default: 1 },
+  booking_id: { type: String, default: "" },
+});
+
 const pickupSchema = new Schema({
   meeting_point: String,
   time: String,
   details: String,
   lat: Number,
   lon: Number,
-  guests: [bookingSchema],
+  guests: [taskGuestSchema],
 });
 
 const scheduleTaskSchema = new Schema(
