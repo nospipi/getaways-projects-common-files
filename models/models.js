@@ -327,6 +327,7 @@ module.exports = {
   BalanceModel: model("balance_transaction", balanceSchema),
   AnnouncementModel: model("announcement", announcementSchema),
   ScheduleTaskModel: model("schedule_task", scheduleTaskSchema),
+  UserDayScheduleModel: model("user_day_schedule", userDayScheduleSchema),
   FrequentMeetingPointModel: model(
     "frequent_meeting_point",
     frequentMeetingPointSchema
