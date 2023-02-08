@@ -267,7 +267,7 @@ const pickupSchema = new Schema({
 
 const userDayScheduleSchema = new Schema(
   {
-    date: { type: Date, required: true },
+    date: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     isDayOff: { type: Boolean, default: false },
     tasks: [
