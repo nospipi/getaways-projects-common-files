@@ -270,12 +270,7 @@ const userDayScheduleSchema = new Schema(
     date: { type: String },
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     isDayOff: { type: Boolean, default: false },
-    tasks: [
-      {
-        product: { type: Schema.Types.ObjectId, ref: "Product" },
-        time: { type: String, required: true },
-      },
-    ],
+    tasks: [{ type: Schema.Types.ObjectId, ref: "Product" }],
   },
   {
     minimize: false,
