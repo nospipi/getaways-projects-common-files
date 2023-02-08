@@ -265,6 +265,23 @@ const pickupSchema = new Schema({
   guests: [taskGuestSchema],
 });
 
+const userDayScheduleSchema = new Schema(
+  {
+    date: { type: Date, required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    isDayOff: { type: Boolean, default: false },
+    tasks: [
+      {
+        product: { type: Schema.Types.ObjectId, ref: "Product" },
+        time: { type: String, required: true },
+      },
+    ],
+  },
+  {
+    minimize: false,
+  }
+);
+
 const scheduleTaskSchema = new Schema(
   {
     activity: { type: Object, required: true },
