@@ -277,6 +277,14 @@ const userDayScheduleSchema = new Schema(
   }
 );
 
+const notificationSchema = new Schema({
+  title: { type: String, required: true },
+  body: { type: String, required: true },
+  date: { type: String, required: true },
+  data: { type: Object, default: {} },
+  isRead: { type: Boolean, default: false },
+});
+
 const scheduleTaskSchema = new Schema(
   {
     activity: { type: Object, required: true },
@@ -337,4 +345,5 @@ module.exports = {
   ChannelModel: model("channel", channelsSchema),
   MeetingPointModel: model("meeting_point", meetingPointSchema),
   TodoModel: model("todo", todoSchema),
+  NotificationModel: model("notification", notificationSchema),
 };
