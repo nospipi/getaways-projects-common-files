@@ -272,6 +272,13 @@ const userDayScheduleSchema = new Schema(
     user: { type: String, required: true },
     isDayOff: { type: Boolean, default: false },
     tasks: [{ type: String }],
+    comments: [
+      {
+        text: String,
+        date: String,
+        user: String,
+      },
+    ],
   },
   {
     minimize: false,
