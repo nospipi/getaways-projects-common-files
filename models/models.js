@@ -242,7 +242,7 @@ const bookingSchema = new Schema(
     billed: { type: Boolean, default: false }, // -
     updated_at: { type: Array }, // -
     email_history: { type: Array, default: [] }, // -
-    task: { type: String }, // -
+    task_id: { type: String }, // -
     tour_info_url: { type: String }, // -
   },
   {
