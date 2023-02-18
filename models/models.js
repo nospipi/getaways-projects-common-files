@@ -303,7 +303,6 @@ const scheduleTaskSchema = new Schema(
     pickups: [pickupSchema],
     details: String,
     author: { type: Object, required: true },
-    tour_info_url: String,
   },
   {
     minimize: false,
