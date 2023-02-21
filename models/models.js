@@ -304,6 +304,7 @@ const scheduleTaskSchema = new Schema(
     details: String,
     author: { type: Object, required: true },
     vehicle_position: Object,
+    tour_info_url: String,
   },
   {
     minimize: false,
