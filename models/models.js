@@ -252,10 +252,20 @@ const bookingSchema = new Schema(
 bookingSchema.plugin(mongoosastic);
 bookingSchema.plugin(mongoosePaginate);
 
+const messageSchema = new Schema({
+  date: { type: String },
+  body: { type: String },
+  public: { type: Boolean, default: false },
+});
+
 const taskGuestSchema = new Schema({
   name: { type: String, default: "" },
   count: { type: Number, default: 1 },
   booking_id: { type: String, default: "" },
+  messages: {
+    type: [messageSchema],
+    default: [],
+  },
 });
 
 const pickupSchema = new Schema({
