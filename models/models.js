@@ -255,7 +255,8 @@ bookingSchema.plugin(mongoosePaginate);
 const messageSchema = new Schema({
   date: { type: String },
   body: { type: String },
-  public: { type: Boolean, default: false },
+  isDeleted: { type: Boolean, default: false },
+  isPublic: { type: Boolean, default: false },
 });
 
 const taskGuestSchema = new Schema({
