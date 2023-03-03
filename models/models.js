@@ -378,4 +378,8 @@ module.exports = {
   MeetingPointModel: model("meeting_point", meetingPointSchema),
   TodoModel: model("todo", todoSchema),
   NotificationModel: model("notification", notificationSchema),
+  G4STrackingSessionCredentialsModel: model(
+    "g4s_tracking_session_credentials",
+    g4sTrackingSessionCredentialsSchema
+  ),
 };
