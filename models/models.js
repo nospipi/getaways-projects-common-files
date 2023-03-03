@@ -7,6 +7,8 @@ const mongoosastic = require("mongoosastic");
 // require("getaways-projects-common-files/models/models.js");
 // npm install https://github.com/nospipi/getaways-projects-common-files
 
+//-------------------------------------------------------------------------------
+
 const activitySchema = new Schema({
   type: {
     type: String,
@@ -343,6 +345,15 @@ const appVersionSchema = new Schema({
   ios: Boolean,
   android: Boolean,
 });
+
+const g4sTrackingSessionCredentialsSchema = new Schema({
+  username: String,
+  password: String,
+  UserIdGuid: String,
+  SessionId: String,
+});
+
+//--------------------------------------------------------------
 
 module.exports = {
   UserModel: model("user", userSchema),
