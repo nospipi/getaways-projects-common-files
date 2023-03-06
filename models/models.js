@@ -131,6 +131,11 @@ const vehicleSchema = new Schema({
     uniqueCaseInsensitive: true,
   },
   gps_tracker_uid: String,
+  position: {
+    latitude: Number,
+    longitude: Number,
+    updated_at: Date,
+  },
 });
 vehicleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
