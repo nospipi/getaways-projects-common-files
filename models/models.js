@@ -283,6 +283,7 @@ const pickupSchema = new Schema({
   details: String,
   lat: Number,
   lon: Number,
+  distance_to_vehicle: Object,
   guests: [taskGuestSchema],
 });
 
