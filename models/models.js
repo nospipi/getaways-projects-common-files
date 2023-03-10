@@ -382,6 +382,7 @@ module.exports = {
   BookingModel: model("booking", bookingSchema),
   ChannelModel: model("channel", channelsSchema),
   MeetingPointModel: model("meeting_point", meetingPointSchema),
+  PickupModel: model("pickup", pickupSchema),
   TodoModel: model("todo", todoSchema),
   NotificationModel: model("notification", notificationSchema),
   G4STrackingSessionCredentialsModel: model(
