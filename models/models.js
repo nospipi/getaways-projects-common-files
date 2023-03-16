@@ -130,10 +130,20 @@ const vehicleSchema = new Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
+  color: {
+    type: String,
+    required: true,
+  },
   gps_tracker_uid: String,
   position: {
     latitude: Number,
     longitude: Number,
+    speed: Number,
+    heading: Number,
     updated_at: Date,
   },
 });
