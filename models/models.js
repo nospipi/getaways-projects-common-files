@@ -258,6 +258,7 @@ const bookingSchema = new Schema(
     cancelled: { type: Boolean, default: false }, // -
     planned: { type: Boolean, default: false }, // -
     billed: { type: Boolean, default: false }, // -
+    total_paid: { type: String, default: "0.00" },
     updated_at: { type: Array }, // -
     email_history: { type: Array, default: [] }, // -
     task_id: { type: String }, // -
