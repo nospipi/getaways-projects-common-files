@@ -233,6 +233,7 @@ const meetingPointSchema = new Schema(
 const bookingSchema = new Schema(
   {
     ref: { type: String, default: "" }, //regiondo  === items[0].external_id
+    order_number: { type: String, default: "" }, //regiondo  === order_number
     booking_date: { type: String }, //regiondo  === created_at format to date
     date: { type: String }, //regiondo  === event_date_time
     product: { type: Object }, // lookup product_id in products collection
