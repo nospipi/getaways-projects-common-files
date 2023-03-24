@@ -254,7 +254,7 @@ const bookingSchema = new Schema(
     saved_pickup_location: String, // -
     pickup_time: { type: String, default: "" }, // -
     source: { type: String }, //
-    channel: channelsSchema, // -
+    channel: { type: Object, default: {} }, // -
     client_messaged: { type: Boolean, default: false }, // -
     client_response_status: { type: String, default: "PENDING" }, // -
     notes: { type: String, default: "" }, // -
