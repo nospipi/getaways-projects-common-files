@@ -230,6 +230,10 @@ const meetingPointSchema = new Schema(
   }
 );
 
+const channelsSchema = new Schema({
+  title: { type: String, required: true },
+});
+
 const bookingSchema = new Schema(
   {
     ref: { type: String, default: "" }, //regiondo  === items[0].external_id
@@ -249,7 +253,7 @@ const bookingSchema = new Schema(
     pickup_location: meetingPointSchema, // -
     saved_pickup_location: String, // -
     pickup_time: { type: String, default: "" }, // -
-    source: { type: String }, //
+    source: channelsSchema, // -
     client_messaged: { type: Boolean, default: false }, // -
     client_response_status: { type: String, default: "PENDING" }, // -
     notes: { type: String, default: "" }, // -
@@ -350,10 +354,6 @@ const todoSchema = new Schema({
   completedBy: { type: String, default: null },
 });
 todoSchema.plugin(mongoosePaginate);
-
-const channelsSchema = new Schema({
-  title: { type: String, required: true },
-});
 
 const appVersionSchema = new Schema({
   version: { type: String, required: true },
