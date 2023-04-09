@@ -204,6 +204,7 @@ const productsSchema = new Schema(
     product_code: { type: String, required: true },
     coordinates: { type: Object },
     address: { type: String },
+    location: { type: String },
     img_url: { type: String },
     platform_product_name: { type: String },
     product_description: { type: String },
@@ -229,7 +230,6 @@ const meetingPointSchema = new Schema(
     minimize: false,
   }
 );
-
 const channelsSchema = new Schema({
   title: { type: String, required: true },
 });
