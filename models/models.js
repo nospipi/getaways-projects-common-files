@@ -327,7 +327,7 @@ const notificationSchema = new Schema({
   body: { type: String, required: true },
   date: { type: String, required: true },
   data: { type: Object, default: {} },
-  isRead: { type: Boolean, default: false },
+  isReadBy: { type: Array, default: [] },
 });
 
 const scheduleTaskSchema = new Schema(
