@@ -324,7 +324,7 @@ const userDayScheduleSchema = new Schema(
 
 const notificationSchema = new Schema({
   title: { type: String, required: true },
-  body: { type: String, required: true },
+  body: String,
   date: { type: Date, default: Date.now },
   data: { type: Object, default: {} },
   isReadBy: { type: Array, default: [] },
