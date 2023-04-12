@@ -329,6 +329,7 @@ const notificationSchema = new Schema({
   data: { type: Object, default: {} },
   isReadBy: { type: Array, default: [] },
 });
+notificationSchema.plugin(mongoosePaginate);
 
 const scheduleTaskSchema = new Schema(
   {
