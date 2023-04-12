@@ -327,7 +327,6 @@ const notificationSchema = new Schema({
   body: String,
   date: { type: Date, default: Date.now },
   data: { type: Object, default: {} },
-  isReadBy: { type: Array, default: [] },
 });
 notificationSchema.plugin(mongoosePaginate);
 
