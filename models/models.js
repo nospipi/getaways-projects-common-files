@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 const { Schema, model } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
-const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const mongoosastic = require("mongoosastic");
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
@@ -329,7 +328,7 @@ const notificationSchema = new Schema({
   date: { type: Date, default: Date.now },
   data: { type: Object, default: {} },
 });
-notificationSchema.plugin(aggregatePaginate);
+notificationSchema.plugin(mongoosePaginate);
 
 const scheduleTaskSchema = new Schema(
   {
