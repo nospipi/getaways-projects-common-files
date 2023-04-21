@@ -330,6 +330,14 @@ const notificationSchema = new Schema({
 });
 notificationSchema.plugin(mongoosePaginate);
 
+const PwaPushSubscriptionSchema = new mongoose.Schema({
+  endpoint: String,
+  keys: {
+    p256dh: String,
+    auth: String,
+  },
+});
+
 const scheduleTaskSchema = new Schema(
   {
     activity: { type: Object, required: true },
@@ -397,6 +405,10 @@ module.exports = {
   PickupModel: model("pickup", pickupSchema),
   TodoModel: model("todo", todoSchema),
   NotificationModel: model("notification", notificationSchema),
+  PwaPushSubscriptionModel: model(
+    "pwa_push_subscription",
+    PwaPushSubscriptionSchema
+  ),
   G4STrackingSessionCredentialsModel: model(
     "g4s_tracking_session_credentials",
     g4sTrackingSessionCredentialsSchema
