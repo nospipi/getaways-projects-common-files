@@ -160,6 +160,7 @@ const announcementSchema = new Schema({
   },
   date: { type: Date, default: Date.now },
   critical: { type: Boolean, required: true },
+  pinned: { type: Boolean, default: false },
 });
 
 const bugReportSchema = new Schema({
