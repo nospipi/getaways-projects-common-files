@@ -214,6 +214,8 @@ const productsSchema = new Schema(
     compatible_billing_codes: { type: Array, required: true }, // all corresponding billing ids
     crewGroups: { type: Array, default: [] },
     crewRoles: { type: Array, default: [] },
+    isPrivate: { type: Boolean, required: true },
+    isGuided: { type: Boolean, required: true },
   },
   {
     minimize: false,
