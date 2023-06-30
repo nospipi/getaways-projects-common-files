@@ -279,6 +279,13 @@ const bookingSchema = new Schema(
 bookingSchema.plugin(mongoosastic);
 bookingSchema.plugin(mongoosePaginate);
 
+const tourGroupSchema = new Schema({
+  product: String,
+  date: String,
+  time: String,
+  bookings: Array,
+});
+
 const messageSchema = new Schema({
   date: { type: String },
   body: { type: String },
@@ -403,6 +410,7 @@ module.exports = {
   RequestModel: model("request", requestSchema),
   ProductsModel: model("products", productsSchema),
   BookingModel: model("booking", bookingSchema),
+  TourGroupModel: model("tour_group", tourGroupSchema),
   ChannelModel: model("channel", channelsSchema),
   MeetingPointModel: model("meeting_point", meetingPointSchema),
   PickupModel: model("pickup", pickupSchema),
