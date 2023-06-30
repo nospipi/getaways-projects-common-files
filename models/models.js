@@ -283,7 +283,7 @@ const tourGroupSchema = new Schema({
   product: String,
   date: String,
   time: String,
-  bookings: Array,
+  bookings: { type: Array, default: [] },
 });
 
 const messageSchema = new Schema({
