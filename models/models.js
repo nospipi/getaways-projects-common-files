@@ -207,6 +207,10 @@ const productsSchema = new Schema(
     address: { type: String },
     location: { type: String },
     img_url: { type: String },
+    activity_level: { type: Array },
+    additional_info: { type: Array },
+    special_instructions: { type: Array },
+    highlights: { type: Array },
     platform_product_name: { type: String },
     product_description: { type: String },
     time_slots: { type: Array, required: true },
@@ -286,7 +290,7 @@ const tourGroupSchema = new Schema({
   bookings: { type: Array, default: [] },
   task: String,
   guide: String,
-  index : Number,
+  index: Number,
 });
 
 const messageSchema = new Schema({
