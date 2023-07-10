@@ -400,10 +400,10 @@ const portalUserClickSchema = new Schema({
   date: { type: Date, default: Date.now },
   ref: String,
   booking_id: String,
-  name: String,
+  client_name: String,
   product: String,
-  product_date: String,
-  event_type: String,
+  event_date: String,
+  user_action: String,
 });
 
 //--------------------------------------------------------------
