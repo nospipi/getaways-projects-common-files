@@ -404,7 +404,6 @@ const portalUserClickSchema = new Schema({
   product: String,
   product_date: String,
   event_type: String,
-  event_name: String,
 });
 
 //--------------------------------------------------------------
