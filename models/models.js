@@ -407,7 +407,7 @@ const portalUserSessionSchema = new Schema({
   booking_date: String,
   client_name: String,
   product_title: String,
-  session_actions: [portalUserActionSchema],
+  session_actions: { type: [portalUserActionSchema], default: [] },
   sessionDurationInSeconds: Number,
 });
 
