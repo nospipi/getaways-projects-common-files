@@ -396,7 +396,7 @@ const g4sTrackingSessionCredentialsSchema = new Schema({
   SessionId: String,
 });
 
-const portalUserClickSchema = new Schema({
+const portalUserActionSchema = new Schema({
   date: { type: Date, default: Date.now },
   ref: String,
   booking_id: String,
@@ -441,5 +441,5 @@ module.exports = {
     "g4s_tracking_session_credentials",
     g4sTrackingSessionCredentialsSchema
   ),
-  PortalUserClickModel: model("portal_user_click", portalUserClickSchema),
+  PortalUserActionModel: model("portal_user_click", portalUserActionSchema),
 };
