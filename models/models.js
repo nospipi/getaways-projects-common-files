@@ -441,5 +441,5 @@ module.exports = {
     "g4s_tracking_session_credentials",
     g4sTrackingSessionCredentialsSchema
   ),
-  PortalUserActionModel: model("portal_user_click", portalUserActionSchema),
+  PortalUserActionModel: model("portal_user_action", portalUserActionSchema),
 };
