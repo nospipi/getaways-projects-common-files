@@ -411,6 +411,7 @@ const portalUserSessionSchema = new Schema({
   device_info: Object,
   sessionDurationInSeconds: Number,
 });
+portalUserSessionSchema.plugin(mongoosePaginate);
 
 //--------------------------------------------------------------
 
