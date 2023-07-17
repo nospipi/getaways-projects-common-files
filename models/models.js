@@ -413,6 +413,15 @@ const portalUserSessionSchema = new Schema({
 });
 portalUserSessionSchema.plugin(mongoosePaginate);
 
+const vehicleServiceLogEntrySchema = new Schema({
+  vehicle_id: String,
+  date: String,
+  odometer: String,
+  cost: String,
+  repairs: [String],
+  notes: String,
+});
+
 //--------------------------------------------------------------
 
 module.exports = {
@@ -449,4 +458,5 @@ module.exports = {
     g4sTrackingSessionCredentialsSchema
   ),
   PortalUserSessionModel: model("portal_user_session", portalUserSessionSchema),
+  VehicleServiceLogEntryModel: model("vehicle_service_log_entry", vehicleServiceLogEntrySchema),
 };
