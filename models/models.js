@@ -415,6 +415,7 @@ portalUserSessionSchema.plugin(mongoosePaginate);
 
 const vehicleServiceLogEntrySchema = new Schema({
   vehicle_id: String,
+  description: String,
   date: String,
   odometer: String,
   cost: String,
