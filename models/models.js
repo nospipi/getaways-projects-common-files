@@ -422,6 +422,7 @@ const vehicleServiceLogEntrySchema = new Schema({
   repairs: [String],
   notes: String,
 });
+vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
 
 //--------------------------------------------------------------
 
