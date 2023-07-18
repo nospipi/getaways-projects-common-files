@@ -146,6 +146,13 @@ const vehicleSchema = new Schema({
     heading: Number,
     updated_at: Date,
   },
+  upcoming_scheduled_service: [{
+    date: String,
+    time: String,
+    workshop: String,
+    planned_repairs: [String],
+  }],
+  notes: [String]
 });
 vehicleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
@@ -416,6 +423,7 @@ portalUserSessionSchema.plugin(mongoosePaginate);
 const vehicleServiceLogEntrySchema = new Schema({
   vehicle_id: String,
   description: String,
+  workshop: String,
   date: String,
   odometer: String,
   cost: String,
