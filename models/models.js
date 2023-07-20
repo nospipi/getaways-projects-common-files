@@ -155,7 +155,10 @@ const vehicleSchema = new Schema({
     }],
     default: [],
   },
-  notes: [String]
+  notes: {
+    type: [String],
+    default: [],
+  }
 });
 vehicleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
