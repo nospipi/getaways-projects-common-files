@@ -146,12 +146,15 @@ const vehicleSchema = new Schema({
     heading: Number,
     updated_at: Date,
   },
-  upcoming_scheduled_service: [{
-    date: String,
-    time: String,
-    workshop: String,
-    planned_repairs: [String],
-  }],
+  upcoming_scheduled_service: {
+    type: [{
+      date: String,
+      time: String,
+      workshop: String,
+      planned_repairs: [String],
+    }],
+    default: [],
+  },
   notes: [String]
 });
 vehicleSchema.plugin(uniqueValidator, {
