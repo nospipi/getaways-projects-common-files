@@ -147,18 +147,16 @@ const vehicleSchema = new Schema({
     updated_at: Date,
   },
   upcoming_scheduled_service: {
-    type: [{
-      date: String,
-      time: String,
-      workshop: String,
-      planned_repairs: [String],
-    }],
+    type: [
+      {
+        date: String,
+        time: String,
+        workshop: String,
+        planned_repairs: [String],
+      },
+    ],
     default: [],
   },
-  notes: {
-    type: [String],
-    default: [],
-  }
 });
 vehicleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
@@ -474,5 +472,8 @@ module.exports = {
     g4sTrackingSessionCredentialsSchema
   ),
   PortalUserSessionModel: model("portal_user_session", portalUserSessionSchema),
-  VehicleServiceLogEntryModel: model("vehicle_service_log_entry", vehicleServiceLogEntrySchema),
+  VehicleServiceLogEntryModel: model(
+    "vehicle_service_log_entry",
+    vehicleServiceLogEntrySchema
+  ),
 };
