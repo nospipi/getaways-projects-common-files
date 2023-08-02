@@ -231,6 +231,7 @@ const productsSchema = new Schema(
     crewRoles: { type: Array, default: [] },
     isPrivate: { type: Boolean, required: true },
     isGuided: { type: Boolean, required: true },
+    pickupIncluded: { type: Boolean, required: true },
   },
   {
     minimize: false,
