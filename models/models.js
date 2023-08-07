@@ -440,6 +440,8 @@ const vehicleServiceLogEntrySchema = new Schema({
 });
 vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
 
+const BokunTestSchema = new Schema({});
+
 //--------------------------------------------------------------
 
 module.exports = {
@@ -480,4 +482,5 @@ module.exports = {
     "vehicle_service_log_entry",
     vehicleServiceLogEntrySchema
   ),
+  BokunTestModel: model("bokun_test", BokunTestSchema),
 };
