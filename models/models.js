@@ -442,8 +442,7 @@ vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
 
 const BokunTestSchema = new Schema({
   data: {
-    type: Mixed,
-    default: {},
+    type: Object,
   },
 });
 
