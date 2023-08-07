@@ -440,7 +440,12 @@ const vehicleServiceLogEntrySchema = new Schema({
 });
 vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
 
-const BokunTestSchema = new Schema({});
+const BokunTestSchema = new Schema({
+  data: {
+    type: Mixed,
+    default: {},
+  },
+});
 
 //--------------------------------------------------------------
 
