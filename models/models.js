@@ -232,6 +232,7 @@ const productsSchema = new Schema(
     isPrivate: { type: Boolean, required: true },
     isGuided: { type: Boolean, required: true },
     pickupIncluded: { type: Boolean, required: true },
+    review_link: { type: String },
   },
   {
     minimize: false,
