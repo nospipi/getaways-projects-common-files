@@ -93,6 +93,17 @@ const userSchema = new Schema(
       tel: String,
       email: String,
     },
+    web_app_user_preferences: {
+      notifications: {
+        type: Object,
+        default: {
+          newBookings: true,
+          bookingUpdates: true,
+          bookingCancellations: true,
+          bookingUpdates: true,
+        },
+      },
+    },
     isAdmin: Boolean,
     isModerator: Boolean,
     permissions: Object,
