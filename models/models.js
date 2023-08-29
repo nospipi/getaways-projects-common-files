@@ -98,12 +98,11 @@ const userSchema = new Schema(
         type: Object,
         default: {
           shown: {
-            newBookings: true,
-            bookingUpdates: true,
-            bookingCancellations: true,
-            bookingUpdates: true,
-            clientConfirmations: true,
-            clientLocationUpdates: true,
+            new_booking: true,
+            booking_changed_date: true,
+            booking_cancelled: true,
+            client_confirmed: true,
+            client_updated_location: true,
           },
         },
       },
