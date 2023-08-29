@@ -97,10 +97,14 @@ const userSchema = new Schema(
       notifications: {
         type: Object,
         default: {
-          newBookings: true,
-          bookingUpdates: true,
-          bookingCancellations: true,
-          bookingUpdates: true,
+          shown: {
+            newBookings: true,
+            bookingUpdates: true,
+            bookingCancellations: true,
+            bookingUpdates: true,
+            clientConfirmations: true,
+            clientLocationUpdates: true,
+          },
         },
       },
     },
