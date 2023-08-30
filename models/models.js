@@ -301,6 +301,7 @@ const bookingSchema = new Schema(
     updated_at: { type: Array }, // -
     email_history: { type: Array, default: [] }, // -
     task_id: { type: String }, // -
+    tour_group_id: { type: String }, // -
   },
   {
     minimize: false,
@@ -373,7 +374,12 @@ const notificationSchema = new Schema({
   title: { type: String, required: true },
   body: String,
   date: { type: Date, default: Date.now },
-  data: { type: Object, default: {} },
+  data: {
+    type: Object,
+    default: {
+      type: { type: String, default: "" },
+    },
+  },
 });
 notificationSchema.plugin(mongoosePaginate);
 
