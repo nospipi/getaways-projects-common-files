@@ -229,6 +229,7 @@ const meetingPointSchema = new Schema(
     latitude: { type: Number },
     longitude: { type: Number },
     google_maps_url: { type: String },
+    instructions: { type: String },
   },
   {
     minimize: false,
