@@ -226,10 +226,12 @@ const requestSchema = new Schema({
 const meetingPointSchema = new Schema(
   {
     name: { type: String, default: "" },
+    address: { type: String },
     latitude: { type: Number },
     longitude: { type: Number },
     google_maps_url: { type: String },
     instructions: { type: String },
+    img_url: { type: String },
   },
   {
     minimize: false,
