@@ -223,6 +223,18 @@ const requestSchema = new Schema({
   created_at: { type: Date, default: Date.now },
 });
 
+const meetingPointSchema = new Schema(
+  {
+    name: { type: String, default: "" },
+    latitude: { type: Number },
+    longitude: { type: Number },
+    google_maps_url: { type: String },
+  },
+  {
+    minimize: false,
+  }
+);
+
 const productsSchema = new Schema(
   {
     title: { type: String, required: true },
@@ -231,13 +243,7 @@ const productsSchema = new Schema(
     coordinates: { type: Object },
     address: { type: String },
     location: { type: String },
-    pickup_location: {
-      type: {
-        name: { type: String, default: "" },
-        latitude: { type: Number },
-        longitude: { type: Number },
-      },
-    },
+    pickup_location: meetingPointSchema,
     img_url: { type: String },
     activity_level: { type: Array },
     additional_info: { type: Array },
@@ -260,17 +266,6 @@ const productsSchema = new Schema(
   }
 );
 
-const meetingPointSchema = new Schema(
-  {
-    name: { type: String, default: "" },
-    latitude: { type: Number },
-    longitude: { type: Number },
-    google_maps_url: { type: String },
-  },
-  {
-    minimize: false,
-  }
-);
 const channelsSchema = new Schema({
   title: { type: String, required: true },
 });
