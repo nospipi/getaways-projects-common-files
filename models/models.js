@@ -231,6 +231,13 @@ const productsSchema = new Schema(
     coordinates: { type: Object },
     address: { type: String },
     location: { type: String },
+    pickup_location: {
+      type: {
+        name: { type: String, default: "" },
+        latitude: { type: Number },
+        longitude: { type: Number },
+      },
+    },
     img_url: { type: String },
     activity_level: { type: Array },
     additional_info: { type: Array },
