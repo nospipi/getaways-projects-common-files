@@ -263,7 +263,7 @@ const productsSchema = new Schema(
     product_description: { type: String },
     time_slots: { type: [String], required: true },
     pricing_options: { type: [String], required: true },
-    compatible_billing_codes: { type: [String], required: true }, // all corresponding billing ids
+    compatible_billing_codes: { type: Array, required: true }, // all corresponding billing ids
     crewGroups: { type: Array, default: [] },
     crewRoles: { type: Array, default: [] },
     isPrivate: { type: Boolean, required: true },
