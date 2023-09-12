@@ -244,8 +244,6 @@ const productsSchema = new Schema(
     type: { type: String },
     product_code: { type: String, default: "" },
     bokun_product_code: { type: String, default: "" },
-    coordinates: { type: Object },
-    address: { type: String },
     location: {
       type: {
         address: String,
@@ -255,7 +253,7 @@ const productsSchema = new Schema(
     },
     meeting_point_id: { type: String },
     img_url: { type: String },
-    activity_level: { type: [String] },
+    activity_level: { type: String },
     additional_info: { type: [String] },
     special_instructions: { type: [String] },
     highlights: { type: [String] },
