@@ -243,7 +243,7 @@ const productsSchema = new Schema(
     title: { type: String, required: true },
     type: { type: String },
     product_code: { type: String, required: true },
-    bokun_product_code: { type: String, required: true },
+    bokun_product_code: { type: String, required: true, default: "" },
     coordinates: { type: Object },
     address: { type: String },
     location: {
