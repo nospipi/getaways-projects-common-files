@@ -291,7 +291,6 @@ const bookingSchema = new Schema(
     billing_codes: { type: Array, default: [] }, // -
     client_location: { type: String, default: "" }, // -
     pickup_location: meetingPointSchema, // -
-    saved_pickup_location: String, // -
     pickup_time: { type: String, default: "" }, // -
     channel: { type: Object, default: {} }, // -
     client_messaged: { type: Boolean, default: false }, // -
