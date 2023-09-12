@@ -247,6 +247,7 @@ const productsSchema = new Schema(
     address: { type: String },
     location: { type: String },
     pickup_location: meetingPointSchema,
+    pickup_location_id: { type: String },
     img_url: { type: String },
     activity_level: { type: Array },
     additional_info: { type: Array },
