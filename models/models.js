@@ -327,6 +327,7 @@ const tourGroupSchema = new Schema({
   time: String,
   bookings: { type: Array, default: [] },
   task: String,
+  notes: String,
   guide: String,
   index: {
     type: Number,
