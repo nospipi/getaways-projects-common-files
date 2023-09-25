@@ -93,6 +93,7 @@ const userSchema = new Schema(
       tel: String,
       email: String,
     },
+    id_number: String,
     web_app_user_preferences: {
       notifications: {
         type: Object,
