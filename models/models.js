@@ -303,7 +303,6 @@ const bookingSchema = new Schema(
     client_response_status: { type: String, default: "PENDING" }, // -
     notes: { type: String, default: "" }, // -
     group: { type: Number, default: 1 }, // -
-    indexInGroup: { type: Number, default: 1 }, // -
     amended: { type: Boolean, default: false }, // -
     cancelled: { type: Boolean, default: false }, // -
     planned: { type: Boolean, default: false }, // -
