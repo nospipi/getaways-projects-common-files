@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 const { Schema, model } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
+const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const mongoosastic = require("mongoosastic");
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
@@ -329,14 +330,14 @@ const tourGroupSchema = new Schema({
   task: String,
   notes: String,
   guide: String,
-  guide_confirmation:String,
+  guide_confirmation: String,
   index: {
     type: Number,
     default: 1,
   },
 });
 
-tourGroupSchema.plugin(mongoosePaginate);
+tourGroupSchema.plugin(mongooseAggregatePaginate);
 
 const messageSchema = new Schema({
   date: { type: String },
