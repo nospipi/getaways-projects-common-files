@@ -329,6 +329,7 @@ const tourGroupSchema = new Schema({
   task: String,
   notes: String,
   guide: String,
+  guide_confirmation:String,
   index: {
     type: Number,
     default: 1,
