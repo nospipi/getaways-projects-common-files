@@ -336,6 +336,8 @@ const tourGroupSchema = new Schema({
   },
 });
 
+tourGroupSchema.plugin(mongoosePaginate);
+
 const messageSchema = new Schema({
   date: { type: String },
   body: { type: String },
