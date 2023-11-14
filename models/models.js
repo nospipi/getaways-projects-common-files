@@ -190,6 +190,8 @@ const announcementSchema = new Schema({
   pinned: { type: Boolean, default: false },
 });
 
+announcementSchema.plugin(mongoosePaginate);
+
 const bugReportSchema = new Schema({
   body: {
     type: String,
@@ -198,6 +200,8 @@ const bugReportSchema = new Schema({
   user: Object,
   date: { type: Date, default: Date.now },
 });
+
+
 
 const requestSchema = new Schema({
   requestedBy: { type: Object, required: true },
