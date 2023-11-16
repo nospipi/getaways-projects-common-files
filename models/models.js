@@ -343,7 +343,8 @@ const tourGroupSchema = new Schema({
   },
 });
 
-tourGroupSchema.plugin(mongooseAggregatePaginate);
+//tourGroupSchema.plugin(mongooseAggregatePaginate);
+tourGroupSchema.plugin(mongoosePaginate);
 
 const messageSchema = new Schema({
   date: { type: String },
