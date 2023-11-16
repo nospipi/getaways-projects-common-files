@@ -332,7 +332,7 @@ const tourGroupSchema = new Schema({
   product: String,
   date: String,
   time: String,
-  bookings: { type: Array, default: [] },
+  bookings:[{type:Schema.Types.ObjectId, ref:'booking'}],
   task: String,
   notes: String,
   guide: { type: String, default: "unassigned" },
