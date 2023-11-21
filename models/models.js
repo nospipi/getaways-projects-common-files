@@ -435,6 +435,7 @@ const scheduleTaskSchema = new Schema(
 );
 
 scheduleTaskSchema.plugin(mongoosePaginate);
+scheduleTaskSchema.plugin(mongooseAggregatePaginate);
 
 const todoSchema = new Schema({
   body: { type: String, required: true },
