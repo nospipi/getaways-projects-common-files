@@ -81,6 +81,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    mobileLogStatus: {
+      type: Boolean,
+      default: false,
+    },
     loggedDevices: Array,
     groups: {
       type: Array,
@@ -332,7 +336,7 @@ const tourGroupSchema = new Schema({
   product: String,
   date: String,
   time: String,
-  bookings:[{type:Schema.Types.ObjectId, ref:'booking'}],
+  bookings: [{ type: Schema.Types.ObjectId, ref: 'booking' }],
   task: String,
   notes: String,
   guide: { type: String, default: "unassigned" },
