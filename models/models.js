@@ -399,6 +399,7 @@ const userDayScheduleSchema = new Schema(
 );
 
 userDayScheduleSchema.plugin(mongoosePaginate);
+userDayScheduleSchema.plugin(mongooseAggregatePaginate);
 
 const notificationSchema = new Schema({
   title: { type: String, required: true },
