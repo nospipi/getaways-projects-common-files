@@ -383,7 +383,7 @@ const userDayScheduleSchema = new Schema(
     date: { type: String },
     user: { type: String, required: true },
     isDayOff: { type: Boolean, default: false },
-    seen: { type: Boolean, default: false },
+    isSeenBy: { type: Array, default: [] },
     tasks: [{ type: String }],
     comments: [
       {
