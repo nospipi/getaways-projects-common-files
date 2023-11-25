@@ -341,13 +341,13 @@ const tourGroupSchema = new Schema({
   guide: { type: String, default: "unassigned" },
   guide_confirmation: String,
   crew: {
-    type: Array,
-    default: [
+    type: [
       {
         role: String,
         user: String,
       },
     ],
+    default: [],
   },
   index: {
     type: Number,
