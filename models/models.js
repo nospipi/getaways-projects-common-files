@@ -340,15 +340,6 @@ const tourGroupSchema = new Schema({
   notes: String,
   guide: { type: String, default: "unassigned" },
   guide_confirmation: String,
-  crew: {
-    type: [
-      {
-        role: String,
-        user: String,
-      },
-    ],
-    default: [],
-  },
   index: {
     type: Number,
     default: 1,
