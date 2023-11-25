@@ -383,6 +383,7 @@ const userDayScheduleSchema = new Schema(
     isDayOff: { type: Boolean, default: false },
     isSeenBy: { type: Array, default: [] },
     tasks: [{ type: String }],
+    tourGroups: [{ type: String }],
     comments: [
       {
         text: String,
