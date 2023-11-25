@@ -207,8 +207,6 @@ const bugReportSchema = new Schema({
   date: { type: Date, default: Date.now },
 });
 
-
-
 const requestSchema = new Schema({
   requestedBy: { type: Object, required: true },
   handledBy: { type: Object, default: null },
@@ -337,11 +335,20 @@ const tourGroupSchema = new Schema({
   product: String,
   date: String,
   time: String,
-  bookings: [{ type: Schema.Types.ObjectId, ref: 'booking' }],
+  bookings: [{ type: Schema.Types.ObjectId, ref: "booking" }],
   task: String,
   notes: String,
   guide: { type: String, default: "unassigned" },
   guide_confirmation: String,
+  crew: {
+    type: Array,
+    default: [
+      {
+        role: String,
+        user: String,
+      },
+    ],
+  },
   index: {
     type: Number,
     default: 1,
