@@ -354,6 +354,7 @@ const tourGroupSchema = new Schema({
       },]
     }], default: []
   },
+  vehicle_id: String, //vehicle schema id
   index: {
     type: Number,
     default: 1,
