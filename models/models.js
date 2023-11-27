@@ -340,6 +340,7 @@ const tourGroupSchema = new Schema({
   bookings: [{ type: Schema.Types.ObjectId, ref: 'booking' }], //need to be populated 
   task: String,
   notes: String,
+  notes_list: { type: Array, default: [] }, // -
   guide: { type: String, default: "unassigned" },
   guide_confirmation: String,
   assignees: {
