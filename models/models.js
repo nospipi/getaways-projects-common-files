@@ -337,11 +337,23 @@ const tourGroupSchema = new Schema({
   product: String,
   date: String,
   time: String,
-  bookings: [{ type: Schema.Types.ObjectId, ref: 'booking' }],
+  bookings: [{ type: Schema.Types.ObjectId, ref: 'booking' }], //need to be populated 
   task: String,
   notes: String,
   guide: { type: String, default: "unassigned" },
   guide_confirmation: String,
+  assignees: {
+    type: [{
+      role: String, //role schema id
+      id: String, //user schema id
+      seen: { type: Boolean, default: false },
+      comments: [{
+        text: String,
+        date: String,
+        author: String,
+      },]
+    }], default: []
+  },
   index: {
     type: Number,
     default: 1,
@@ -444,9 +456,7 @@ scheduleTaskSchema.plugin(mongooseAggregatePaginate);
 
 const dayScheduleSchema = new Schema(
   {
-    date: { type: String },// 2023-11-15
-    tour_group_id: { type: String }, // schema tour_group _id || "day_off"
-    vehicle_id: { type: String }, // schema vehicle _id
+    tour_group_id: { type: String }, // schema tour_group _id || "day_off", contains date,vehicle information
     assignees: {
       type: [{
         id: String,
