@@ -207,6 +207,8 @@ const bugReportSchema = new Schema({
   date: { type: Date, default: Date.now },
 });
 
+
+
 const requestSchema = new Schema({
   requestedBy: { type: Object, required: true },
   handledBy: { type: Object, default: null },
@@ -335,7 +337,7 @@ const tourGroupSchema = new Schema({
   product: String,
   date: String,
   time: String,
-  bookings: [{ type: Schema.Types.ObjectId, ref: "booking" }],
+  bookings: [{ type: Schema.Types.ObjectId, ref: 'booking' }],
   task: String,
   notes: String,
   guide: { type: String, default: "unassigned" },
@@ -383,7 +385,6 @@ const userDayScheduleSchema = new Schema(
     isDayOff: { type: Boolean, default: false },
     isSeenBy: { type: Array, default: [] },
     tasks: [{ type: String }],
-    tourGroups: [{ type: String }],
     comments: [
       {
         text: String,
@@ -440,6 +441,31 @@ const scheduleTaskSchema = new Schema(
 
 scheduleTaskSchema.plugin(mongoosePaginate);
 scheduleTaskSchema.plugin(mongooseAggregatePaginate);
+
+const dayScheduleSchema = new Schema(
+  {
+    date: { type: String },// 2023-11-15
+    tour_group_id: { type: String }, // schema tour_group _id || "day_off"
+    vehicle_id: { type: String }, // schema vehicle _id
+    assignees: {
+      type: [{
+        id: String,
+        comments: [{
+          text: String,
+          date: String,
+          author: String,
+        },]
+      }], default: []
+    },// schema user _id
+    is_seen_by: { type: [String], default: [] },
+  },
+  {
+    minimize: false,
+  }
+);
+
+dayScheduleSchema.plugin(mongoosePaginate);
+dayScheduleSchema.plugin(mongooseAggregatePaginate);
 
 const todoSchema = new Schema({
   body: { type: String, required: true },
