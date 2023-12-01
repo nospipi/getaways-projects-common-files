@@ -343,18 +343,6 @@ const tourGroupSchema = new Schema({
   notes_list: { type: Array, default: [] }, // -
   guide: { type: String, default: "unassigned" },
   guide_confirmation: String,
-  assignees: {
-    type: [{
-      role: String, //role schema id
-      id: String, //user schema id
-      seen: { type: Boolean, default: false },
-      comments: [{
-        text: String,
-        date: String,
-        author: String,
-      },]
-    }], default: []
-  },
   vehicle_id: String, //vehicle schema id
   index: {
     type: Number,
