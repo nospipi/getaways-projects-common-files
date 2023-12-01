@@ -397,8 +397,11 @@ const userDayScheduleSchema = new Schema(
     date: { type: String },
     user: { type: String, required: true },
     isDayOff: { type: Boolean, default: false },
-    isSeenBy: { type: Array, default: [] },
-    tasks: [{ type: String }],
+    isLeave: { type: Boolean, default: false },
+    isSeen: { type: Boolean, default: false },
+    isSeenBy: { type: Array, default: [] }, // to be deprecated
+    tasks: [{ type: String }], // to be deprecated
+    tourGroups: [{ type: String }],
     comments: [
       {
         text: String,
