@@ -401,7 +401,12 @@ const userDayScheduleSchema = new Schema(
     isSeen: { type: Boolean, default: false },
     isSeenBy: { type: Array, default: [] }, // to be deprecated
     tasks: [{ type: String }], // to be deprecated
-    tourGroups: [{ type: Array, default: [] }], // to be deprecated
+    tourGroups: [{
+      type: [{
+        role: String, //role schema id
+        id: String, //tourGroups schema id
+      }], default: []
+    }],
     comments: [
       {
         text: String,
