@@ -203,7 +203,7 @@ const bugReportSchema = new Schema({
     type: String,
     required: [true, "You cannot publish an empty bug report"],
   },
-  user: Object,
+  user: String,
   date: { type: Date, default: Date.now },
 });
 
