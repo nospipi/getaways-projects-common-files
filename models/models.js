@@ -439,7 +439,6 @@ const scheduleTaskSchema = new Schema(
     pickups: [pickupSchema],
     details: String,
     author: { type: Object, required: true },
-    vehicle_position: Array,
   },
   {
     minimize: false,
