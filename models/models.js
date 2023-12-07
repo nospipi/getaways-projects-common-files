@@ -445,10 +445,10 @@ const taskSchema = new Schema(
     product: { type: String, required: true },
     date: { type: String, required: true },
     assignees: Array,
-    vehicle: String,
+    vehicle_id: String,
     pickups: [pickupSchema],
     details: String,
-    author: { type: String, required: true },
+    author_id: { type: String, required: true },
   },
   {
     minimize: false,
