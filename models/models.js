@@ -350,8 +350,9 @@ const tourGroupSchema = new Schema({
   },
 });
 
-//tourGroupSchema.plugin(mongooseAggregatePaginate);
 tourGroupSchema.plugin(mongoosePaginate);
+tourGroupSchema.plugin(mongooseAggregatePaginate);
+
 
 
 
@@ -510,41 +511,6 @@ const vehicleServiceLogEntrySchema = new Schema({
 });
 vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
 
-const BokunTestSchema = new Schema({
-  data: {
-    type: Object,
-  },
-  ref: { type: String, default: "" },
-  order_number: { type: String, default: "" },
-  booking_date: { type: String },
-  date: { type: String },
-  product: { type: Object },
-  product_time_slot: { type: String },
-  name: { type: String, default: "" },
-  count: { type: Number, default: 1 },
-  client_name: { type: String },
-  client_email: { type: String, default: "" },
-  client_phone: { type: String, default: "" },
-  tickets: { type: Object, default: {} },
-  billing_codes: { type: Array, default: [] },
-  client_location: { type: String, default: "" },
-  pickup_location: meetingPointSchema,
-  pickup_time: { type: String, default: "" },
-  channel: { type: Object, default: {} },
-  client_messaged: { type: Boolean, default: false },
-  client_response_status: { type: String, default: "PENDING" },
-  notes: { type: String, default: "" },
-  group: { type: Number, default: 1 },
-  indexInGroup: { type: Number, default: 1 },
-  amended: { type: Boolean, default: false },
-  cancelled: { type: Boolean, default: false },
-  planned: { type: Boolean, default: false },
-  billed: { type: Boolean, default: false },
-  total_paid: { type: Number, default: 0.0 },
-  updated_at: { type: Array },
-  email_history: { type: Array, default: [] },
-  task_id: { type: String },
-});
 
 //--------------------------------------------------------------
 
@@ -587,5 +553,4 @@ module.exports = {
     "vehicle_service_log_entry",
     vehicleServiceLogEntrySchema
   ),
-  BokunTestModel: model("bokun_test", BokunTestSchema),
 };
