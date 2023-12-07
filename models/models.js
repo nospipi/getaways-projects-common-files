@@ -353,23 +353,6 @@ const tourGroupSchema = new Schema({
 //tourGroupSchema.plugin(mongooseAggregatePaginate);
 tourGroupSchema.plugin(mongoosePaginate);
 
-const messageSchema = new Schema({
-  date: { type: String },
-  body: { type: String },
-  isDeleted: { type: Boolean, default: false },
-  isPublic: { type: Boolean, default: false },
-});
-
-const taskGuestSchema = new Schema({
-  name: { type: String, default: "" },
-  count: { type: Number, default: 1 },
-  booking_id: { type: String, default: "" },
-  messages: {
-    type: [messageSchema],
-    default: [],
-  },
-});
-
 
 
 const userDayScheduleSchema = new Schema(
@@ -422,6 +405,11 @@ const PwaPushSubscriptionSchema = new mongoose.Schema({
   },
 });
 
+const taskGuestSchema = new Schema({
+  name: { type: String, default: "" },
+  count: { type: Number, default: 1 },
+});
+
 const pickupSchema = new Schema({
   meeting_point: String,
   time: String,
@@ -450,28 +438,24 @@ const scheduleTaskSchema = new Schema(
 scheduleTaskSchema.plugin(mongoosePaginate);
 scheduleTaskSchema.plugin(mongooseAggregatePaginate);
 
-const dayScheduleSchema = new Schema(
+const taskSchema = new Schema(
   {
-    tour_group_id: { type: String }, // schema tour_group _id || "day_off", contains date,vehicle information
-    assignees: {
-      type: [{
-        id: String,
-        comments: [{
-          text: String,
-          date: String,
-          author: String,
-        },]
-      }], default: []
-    },// schema user _id
-    is_seen_by: { type: [String], default: [] },
+    product: { type: String, required: true },
+    date: { type: String, required: true },
+    assignees: Array,
+    vehicle: String,
+    pickups: [pickupSchema],
+    details: String,
+    author: { type: String, required: true },
   },
   {
     minimize: false,
+    //allows to save empty objects in db
   }
 );
 
-dayScheduleSchema.plugin(mongoosePaginate);
-dayScheduleSchema.plugin(mongooseAggregatePaginate);
+taskSchema.plugin(mongoosePaginate);
+taskSchema.plugin(mongooseAggregatePaginate);
 
 const todoSchema = new Schema({
   body: { type: String, required: true },
@@ -570,6 +554,7 @@ module.exports = {
   VehicleModel: model("vehicle", vehicleSchema),
   BalanceModel: model("balance_transaction", balanceSchema),
   AnnouncementModel: model("announcement", announcementSchema),
+  TaskModel: model("task", taskSchema),
   ScheduleTaskModel: model("schedule_task", scheduleTaskSchema),
   UserDayScheduleModel: model("user_day_schedule", userDayScheduleSchema),
   FrequentMeetingPointModel: model(
