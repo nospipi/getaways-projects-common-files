@@ -370,15 +370,7 @@ const taskGuestSchema = new Schema({
   },
 });
 
-const pickupSchema = new Schema({
-  meeting_point: String,
-  time: String,
-  details: String,
-  lat: Number,
-  lon: Number,
-  distance_to_vehicle: Object,
-  guests: [taskGuestSchema],
-});
+
 
 const userDayScheduleSchema = new Schema(
   {
@@ -428,6 +420,15 @@ const PwaPushSubscriptionSchema = new mongoose.Schema({
     p256dh: String,
     auth: String,
   },
+});
+
+const pickupSchema = new Schema({
+  meeting_point: String,
+  time: String,
+  details: String,
+  lat: Number,
+  lon: Number,
+  guests: [taskGuestSchema],
 });
 
 const scheduleTaskSchema = new Schema(
