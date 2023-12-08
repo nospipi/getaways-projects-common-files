@@ -442,7 +442,7 @@ scheduleTaskSchema.plugin(mongooseAggregatePaginate);
 
 const taskSchema = new Schema(
   {
-    product: { type: String, required: true },
+    product: { type: String },
     date: { type: String, required: true },
     assignees: Array,
     vehicle_id: String,
