@@ -86,7 +86,6 @@ const userSchema = new Schema(
       default: false,
     },
     loggedDevices: Array,
-    expoPushTokens: [String],
     groups: {
       type: Array,
       required: true,
