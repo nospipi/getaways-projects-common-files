@@ -364,6 +364,9 @@ const userDayScheduleSchema = new Schema(
       type: [{
         role: String, //role schema id
         id: String, //tourGroups schema id
+        details: String,
+        guide_confirmation: String,
+
       }], default: []
     },
     isDayOff: { type: Boolean, default: false },
