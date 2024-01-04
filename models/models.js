@@ -500,6 +500,7 @@ const portalUserSessionSchema = new Schema({
   sessionDurationInSeconds: Number,
 });
 portalUserSessionSchema.plugin(mongoosePaginate);
+portalUserSessionSchema.plugin(mongooseAggregatePaginate);
 
 const vehicleServiceLogEntrySchema = new Schema({
   vehicle_id: String,
