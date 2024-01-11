@@ -514,6 +514,12 @@ const vehicleServiceLogEntrySchema = new Schema({
 });
 vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
 
+const bokunDataSchema = new Schema({
+  action: String,
+  data: Object,
+  date: { type: Date, default: Date.now },
+});
+
 
 //--------------------------------------------------------------
 
@@ -556,4 +562,5 @@ module.exports = {
     "vehicle_service_log_entry",
     vehicleServiceLogEntrySchema
   ),
+  BokunDataModel: model("bokun_data", bokunDataSchema),
 };
