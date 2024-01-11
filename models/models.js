@@ -4,6 +4,7 @@ const { Schema, model } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
 const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const mongoosastic = require("mongoosastic");
+const moment = require('moment');
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
 // npm install https://github.com/nospipi/getaways-projects-common-files
@@ -517,7 +518,10 @@ vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
 const bokunDataSchema = new Schema({
   action: String,
   data: Object,
-  date: { type: Date, default: Date.now },
+  date: {
+    type: String,
+    default: moment().format('YYYY-MM-DD HH:mm:ss'),
+  },
 });
 
 
