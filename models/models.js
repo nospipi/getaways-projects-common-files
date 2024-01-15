@@ -274,6 +274,10 @@ const productsSchema = new Schema(
     product_description: { type: String },
     time_slots: { type: [String], required: true },
     pricing_options: { type: [String], required: true },
+    destinations: { type: [String], required: true },
+    tour_types: { type: [String], required: true },
+    tour_duration: { type: Number, required: true },
+    tour_duration_type: { type: String },
     compatible_billing_codes: { type: Array, required: true }, // all corresponding billing ids
     crewGroups: { type: Array, default: [] },
     crewRoles: { type: Array, default: [] },
