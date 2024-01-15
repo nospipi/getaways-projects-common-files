@@ -100,6 +100,9 @@ const userSchema = new Schema(
       email: String,
     },
     id_number: String,
+    afm_number: String,
+    amka_number: String,
+    guide_reg_number: String,
     web_app_user_preferences: {
       notifications: {
         type: Object,
