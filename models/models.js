@@ -264,6 +264,7 @@ const productsSchema = new Schema(
       },
     },
     meeting_point_id: { type: String },
+    slug: { type: String },
     img_url: { type: String },
     product_images: { type: [String] },
     activity_level: { type: String },
