@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 const { Schema, model } = mongoose;
+const _ = require('lodash');
 const mongoosePaginate = require("mongoose-paginate-v2");
 const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const mongoosastic = require("mongoosastic");
@@ -301,6 +302,14 @@ const productsSchema = new Schema(
     minimize: false,
   }
 );
+
+// Pre-save middleware to set the slug based on platform_product_name
+productsSchema.pre("save", function (next) {
+  if (this.platform_product_name) {
+    this.slug = _.kebabCase(this.platform_product_name);
+  }
+  next();
+});
 
 const channelsSchema = new Schema({
   title: { type: String, required: true },
