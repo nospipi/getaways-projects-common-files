@@ -298,8 +298,8 @@ const productsSchema = new Schema(
     tour_duration_type: { type: String },
     tour_categories: { type: [String], required: true },
     compatible_billing_codes: { type: Array, required: true }, // all corresponding billing ids
-    crewGroups: { type: Array, default: [] },
-    crewRoles: { type: Array, default: [] },
+    crewGroups: { type: [String], default: [] },
+    crewRoles: { type: [String], default: [] },
     isPrivate: { type: Boolean, required: true },
     isGuided: { type: Boolean, required: true },
     pickupIncluded: { type: Boolean, required: true },
