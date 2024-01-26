@@ -256,10 +256,22 @@ const meetingPointSchema = new Schema(
 
 const productsSchema = new Schema(
   {
-    title: { type: String, required: true },
-    type: { type: String },
-    product_code: { type: String, default: "" },
-    bokun_product_code: { type: String, default: "" },
+    title: {
+      type: String,
+      required: true,
+      unique: true,
+      uniqueCaseInsensitive: true,
+    },
+    platform_product_name: {
+      type: String,
+      unique: true,
+      uniqueCaseInsensitive: true,
+    },
+    bokun_product_code: {
+      type: String, default: "",
+      unique: true,
+      uniqueCaseInsensitive: true,
+    },
     location: {
       type: {
         address: String,
@@ -269,18 +281,15 @@ const productsSchema = new Schema(
     },
     meeting_point_id: { type: String },
     slug: { type: String },
-    img_url: { type: String },
     product_images: { type: [String] },
     activity_level: { type: String },
     additional_info: { type: [String] },
     special_instructions: { type: [String] },
     highlights: { type: [String] },
-    platform_product_name: { type: String },
-    product_description: { type: String },
-    inclusions: { type: [String] },
-    exclusions: { type: [String] },
     product_short_description: { type: String },
     product_full_description: { type: String },
+    inclusions: { type: [String] },
+    exclusions: { type: [String] },
     time_slots: { type: [String], required: true },
     pricing_options: { type: [String], required: true },
     destinations: { type: [String], required: true },
@@ -302,6 +311,10 @@ const productsSchema = new Schema(
     minimize: false,
   }
 );
+
+productsSchema.plugin(uniqueValidator, {
+  message: "{PATH} {VALUE} already exists.",
+}); //https://www.npmjs.com/package/mongoose-unique-validator
 
 // Pre-save middleware to set the slug based on platform_product_name
 productsSchema.pre("save", function (next) {
