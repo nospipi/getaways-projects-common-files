@@ -280,7 +280,6 @@ const productsSchema = new Schema(
       },
     },
     meeting_point_id: { type: String },
-    corresponding_schedule_task: { type: Object },
     slug: { type: String },
     product_images: { type: [String] },
     activity_level: { type: String },
