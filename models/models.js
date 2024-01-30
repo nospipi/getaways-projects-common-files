@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 const { Schema, model } = mongoose;
-const _ = require('lodash');
+const _ = require("lodash");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const mongoosastic = require("mongoosastic");
-const moment = require('moment');
+const moment = require("moment");
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
 // npm install https://github.com/nospipi/getaways-projects-common-files
@@ -211,8 +211,6 @@ const bugReportSchema = new Schema({
   date: { type: Date, default: Date.now },
 });
 
-
-
 const requestSchema = new Schema({
   requestedBy: { type: Object, required: true },
   handledBy: { type: Object, default: null },
@@ -268,7 +266,8 @@ const productsSchema = new Schema(
       uniqueCaseInsensitive: true,
     },
     bokun_product_code: {
-      type: String, default: "",
+      type: String,
+      default: "",
       unique: true,
       uniqueCaseInsensitive: true,
     },
@@ -282,6 +281,16 @@ const productsSchema = new Schema(
     meeting_point_id: { type: String },
     slug: { type: String },
     product_images: { type: [String] },
+    product_pictures: {
+      type: [
+        {
+          url: String,
+          caption: String,
+          alt: String,
+          description: String,
+        },
+      ],
+    },
     activity_level: { type: String },
     additional_info: { type: [String] },
     special_instructions: { type: [String] },
@@ -374,7 +383,7 @@ const tourGroupSchema = new Schema({
   product: String,
   date: String,
   time: String,
-  bookings: [{ type: Schema.Types.ObjectId, ref: 'booking' }], //need to be populated 
+  bookings: [{ type: Schema.Types.ObjectId, ref: "booking" }], //need to be populated
   task: String,
   task_id: String,
   notes: String,
@@ -393,19 +402,19 @@ const tourGroupSchema = new Schema({
 tourGroupSchema.plugin(mongoosePaginate);
 tourGroupSchema.plugin(mongooseAggregatePaginate);
 
-
-
-
 const userDayScheduleSchema = new Schema(
   {
     date: { type: String },
     user: { type: String, required: true },
     tourGroups: {
-      type: [{
-        role: String, //role schema id
-        id: String, //tourGroups schema id
-        details: String,
-      }], default: []
+      type: [
+        {
+          role: String, //role schema id
+          id: String, //tourGroups schema id
+          details: String,
+        },
+      ],
+      default: [],
     },
     isDayOff: { type: Boolean, default: false },
     isLeave: { type: Boolean, default: false },
@@ -558,10 +567,9 @@ const bokunDataSchema = new Schema({
   data: Object,
   date: {
     type: String,
-    default: moment().format('YYYY-MM-DD HH:mm:ss'),
+    default: moment().format("YYYY-MM-DD HH:mm:ss"),
   },
 });
-
 
 //--------------------------------------------------------------
 
