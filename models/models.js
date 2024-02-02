@@ -291,6 +291,7 @@ const productsSchema = new Schema(
         },
       ],
     },
+    guide_assignment_identifier: { type: String },
     activity_level: { type: String },
     additional_info: { type: [String] },
     special_instructions: { type: [String] },
