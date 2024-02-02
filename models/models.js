@@ -564,6 +564,7 @@ vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
 
 const bokunDataSchema = new Schema({
   action: String,
+  ref: String,
   data: Object,
   date: {
     type: String,
