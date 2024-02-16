@@ -315,7 +315,7 @@ const productsSchema = new Schema(
     isGuided: { type: Boolean, required: true },
     pickupIncluded: { type: Boolean, required: true },
     review_link: { type: String },
-    external_link: { type: String },
+    affiliate_link: { type: String },
     isPublished: { type: Boolean, required: true },
   },
   {
