@@ -261,6 +261,7 @@ const productsSchema = new Schema(
       uniqueCaseInsensitive: true,
     },
     platform_product_name: {
+      required: true,
       type: String,
       unique: true,
       uniqueCaseInsensitive: true,
