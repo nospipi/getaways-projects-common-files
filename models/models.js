@@ -305,7 +305,7 @@ const productsSchema = new Schema(
     pricing_options: { type: [String], required: true },
     destinations: { type: [String], required: true },
     tour_types: { type: [String], required: true },
-    tour_duration: { type: Number, required: true },
+    tour_duration: { type: String, required: true },
     tour_duration_type: { type: String },
     tour_categories: { type: [String], required: true },
     compatible_billing_codes: { type: Array }, // all corresponding billing ids
