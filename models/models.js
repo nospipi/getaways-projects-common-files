@@ -317,6 +317,7 @@ const productsSchema = new Schema(
     review_link: { type: String },
     affiliate_link: { type: String },
     isPublished: { type: Boolean, required: true },
+    market_price: { type: Number, required: true },
   },
   {
     minimize: false,
