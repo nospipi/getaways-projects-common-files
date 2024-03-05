@@ -260,6 +260,14 @@ const productsSchema = new Schema(
       unique: true,
       uniqueCaseInsensitive: true,
     },
+    options: {
+      type: [
+        {
+          title: String,
+          bokun_code: String,
+        },
+      ],
+    },
     platform_product_name: {
       required: true,
       type: String,
