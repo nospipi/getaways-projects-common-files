@@ -254,6 +254,7 @@ const meetingPointSchema = new Schema(
 
 const productsSchema = new Schema(
   {
+    index: { type: Number, required: true },
     title: {
       type: String,
       required: true,
