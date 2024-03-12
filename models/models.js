@@ -400,6 +400,7 @@ const tourGroupSchema = new Schema({
   task_id: String,
   notes: String,
   notes_list: { type: Array, default: [] }, // -
+  guide: String,
   guide_id: String,
   guide_confirmation: String,
   guide_details: String,
