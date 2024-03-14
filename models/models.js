@@ -530,6 +530,15 @@ const todoSchema = new Schema({
 });
 todoSchema.plugin(mongoosePaginate);
 
+const noteSchema = new Schema({
+  body: { type: String, required: true },
+  date: { type: String, required: true },
+  author_id: { type: String, required: true },
+  done: { type: Boolean, default: false },
+});
+noteSchema.plugin(mongoosePaginate);
+noteSchema.plugin(mongooseAggregatePaginate);
+
 const appVersionSchema = new Schema({
   version: { type: String, required: true },
   date: { type: Date, default: Date.now },
@@ -613,6 +622,7 @@ module.exports = {
   MeetingPointModel: model("meeting_point", meetingPointSchema),
   PickupModel: model("pickup", pickupSchema),
   TodoModel: model("todo", todoSchema),
+  NoteModel: model("note", noteSchema),
   NotificationModel: model("notification", notificationSchema),
   PwaPushSubscriptionModel: model(
     "pwa_push_subscription",
