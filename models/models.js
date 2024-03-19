@@ -393,6 +393,7 @@ bookingSchema.plugin(mongoosePaginate);
 
 const tourGroupSchema = new Schema({
   product: String,
+  product_id: String,
   date: String,
   time: String,
   bookings: [{ type: Schema.Types.ObjectId, ref: "booking" }], //need to be populated
