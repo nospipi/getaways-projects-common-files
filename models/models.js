@@ -414,7 +414,7 @@ const tourGroupSchema = new Schema({
   },
 });
 
-//TODO temporary
+//TODO temporary //unset product when is fixed in all apps
 tourGroupSchema.pre("save", function (next) {
   if (this.product_id && !this.product) {
     this.product = this.product_id;
