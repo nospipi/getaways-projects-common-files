@@ -392,8 +392,8 @@ bookingSchema.plugin(mongoosastic);
 bookingSchema.plugin(mongoosePaginate);
 
 const tourGroupSchema = new Schema({
-  product: String,
   product_id: String,
+  product: String,
   date: String,
   time: String,
   bookings: [{ type: Schema.Types.ObjectId, ref: "booking" }], //need to be populated
@@ -412,6 +412,14 @@ const tourGroupSchema = new Schema({
     type: Number,
     default: 1,
   },
+});
+
+//TODO temporary
+tourGroupSchema.pre("save", function (next) {
+  if (this.product_id && !this.product) {
+    this.product = this.product_id;
+  }
+  next();
 });
 
 tourGroupSchema.plugin(mongoosePaginate);
