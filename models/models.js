@@ -596,6 +596,11 @@ const bokunDataSchema = new Schema({
   },
 });
 
+const messageDraftSchema = new Schema({
+  title: String,
+  body: String,
+});
+
 //--------------------------------------------------------------
 
 module.exports = {
@@ -639,4 +644,5 @@ module.exports = {
     vehicleServiceLogEntrySchema
   ),
   BokunDataModel: model("bokun_data", bokunDataSchema),
+  MessageDraftModel: model("message_draft", messageDraftSchema),
 };
