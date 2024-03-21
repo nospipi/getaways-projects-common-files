@@ -541,7 +541,10 @@ todoSchema.plugin(mongoosePaginate);
 
 const noteSchema = new Schema({
   body: { type: String, required: true },
-  date: { type: String, required: true },
+  date: {
+    type: String,
+    default: () => moment().format("YYYY-MM-DD"),
+  },
   author_id: { type: String, required: true },
   public: { type: Boolean, default: false },
   done: { type: Boolean, default: false },
