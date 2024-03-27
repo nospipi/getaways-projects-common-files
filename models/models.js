@@ -315,8 +315,10 @@ const productsSchema = new Schema(
       type: [
         {
           time_slot: String,
-          date_range_from: String,
-          date_range_to: String,
+          date_ranges: {
+            from: String,
+            to: String,
+          },
         },
       ],
     },
