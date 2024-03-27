@@ -316,8 +316,8 @@ const productsSchema = new Schema(
         {
           time_slot: String,
           date_ranges: {
-            from: String,
-            to: String,
+            start: String,
+            end: String,
           },
         },
       ],
