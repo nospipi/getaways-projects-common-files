@@ -311,6 +311,15 @@ const productsSchema = new Schema(
     inclusions: { type: [String] },
     exclusions: { type: [String] },
     time_slots: { type: [String], required: true },
+    time_slots_with_range: {
+      type: [
+        {
+          time_slot: String,
+          date_range_from: String,
+          date_range_to: String,
+        },
+      ],
+    },
     pricing_options: { type: [String], required: true },
     destinations: { type: [String], required: true },
     tour_types: { type: [String], required: true },
