@@ -367,37 +367,38 @@ const channelsSchema = new Schema({
 
 const bookingSchema = new Schema(
   {
-    ref: { type: String, default: "" }, //regiondo  === items[0].external_id
-    order_number: { type: String, default: "" }, //regiondo  === order_number
-    booking_date: { type: String }, //regiondo  === created_at format to date
-    date: { type: String }, //regiondo  === event_date_time
-    product: { type: Object }, // lookup product_id in products collection
-    product_time_slot: { type: String }, //regiondo  === event_date_time format to time
-    name: { type: String, default: "" }, //for scheduleTask,for not breaking mobile app !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    count: { type: Number, default: 1 }, //for scheduleTask,for not breaking mobile app !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    client_name: { type: String }, //  contact_data.first_name + contact_data.last_name
-    client_email: { type: String, default: "" }, // contact_data.email
-    client_phone: { type: String, default: "" }, // contact_data.telephone
-    tickets: { type: Object, default: {} }, // items
-    billing_codes: { type: Array, default: [] }, // -
-    client_location: { type: String, default: "" }, // -
-    pickup_location: meetingPointSchema, // -
-    pickup_time: { type: String, default: "" }, // -
-    channel: { type: Object, default: {} }, // -
-    client_messaged: { type: Boolean, default: false }, // -
-    client_response_status: { type: String, default: "PENDING" }, // -
-    notes: { type: String, default: "" }, // -
-    notes_list: { type: Array, default: [] }, // -
-    group: { type: Number, default: 1 }, // -
-    amended: { type: Boolean, default: false }, // -
-    cancelled: { type: Boolean, default: false }, // -
-    planned: { type: Boolean, default: false }, // -
-    billed: { type: Boolean, default: false }, // -
+    ref: { type: String, default: "" },
+    order_number: { type: String, default: "" },
+    booking_date: { type: String },
+    date: { type: String },
+    product: { type: Object },
+    product_id: { type: String },
+    product_time_slot: { type: String },
+    name: { type: String, default: "" },
+    count: { type: Number, default: 1 },
+    client_name: { type: String },
+    client_email: { type: String, default: "" },
+    client_phone: { type: String, default: "" },
+    tickets: { type: Object, default: {} },
+    billing_codes: { type: Array, default: [] },
+    client_location: { type: String, default: "" },
+    pickup_location: meetingPointSchema,
+    pickup_time: { type: String, default: "" },
+    channel: { type: Object, default: {} },
+    client_messaged: { type: Boolean, default: false },
+    client_response_status: { type: String, default: "PENDING" },
+    notes: { type: String, default: "" },
+    notes_list: { type: Array, default: [] },
+    group: { type: Number, default: 1 },
+    amended: { type: Boolean, default: false },
+    cancelled: { type: Boolean, default: false },
+    planned: { type: Boolean, default: false },
+    billed: { type: Boolean, default: false },
     total_paid: { type: Number, default: 0.0 },
-    updated_at: { type: Array }, // -
-    email_history: { type: Array, default: [] }, // -
-    task_id: { type: String }, // -
-    tour_group_id: { type: String }, // -
+    updated_at: { type: Array },
+    email_history: { type: Array, default: [] },
+    task_id: { type: String },
+    tour_group_id: { type: String },
   },
   {
     minimize: false,
