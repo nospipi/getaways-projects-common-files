@@ -103,6 +103,7 @@ const userSchema = new Schema(
     id_number: String,
     afm_number: String,
     amka_number: String,
+    driver_license_number: String,
     guide_reg_number: String,
     web_app_user_preferences: {
       notifications: {
