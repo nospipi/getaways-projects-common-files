@@ -419,6 +419,7 @@ const tourGroupSchema = new Schema({
   task_id: String,
   notes: String,
   notes_list: { type: Array, default: [] }, // -
+  visible_in_planner: { type: Boolean, default: true },
   guide_id: String,
   guide_uds_id: String,
   guide_confirmation: String,
