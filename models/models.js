@@ -121,6 +121,7 @@ const userSchema = new Schema(
     },
     isAdmin: Boolean,
     isModerator: Boolean,
+    onOfficeDuty: Boolean,
     permissions: Object,
   },
   {
@@ -400,6 +401,7 @@ const bookingSchema = new Schema(
     email_history: { type: Array, default: [] },
     task_id: { type: String },
     tour_group_id: { type: String },
+    automated_message_sent: { type: Boolean, default: false },
   },
   {
     minimize: false,
