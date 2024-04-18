@@ -268,6 +268,8 @@ const productsSchema = new Schema(
         {
           title: String,
           bokun_code: String,
+          is_private: { type: Boolean, required: true },
+          is_guided: { type: Boolean, required: true },
         },
       ],
     },
