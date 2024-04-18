@@ -572,10 +572,6 @@ const noteSchema = new Schema({
   public: { type: Boolean, default: false },
   done: { type: Boolean, default: false },
 });
-noteSchema.pre("save", function (next) {
-  this.date = moment().format("YYYY-MM-DD");
-  next();
-});
 noteSchema.plugin(mongoosePaginate);
 noteSchema.plugin(mongooseAggregatePaginate);
 
