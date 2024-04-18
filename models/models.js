@@ -568,6 +568,7 @@ const noteSchema = new Schema({
     default: () => moment().format("YYYY-MM-DD"),
   },
   author_id: { type: String, required: true },
+  pinned: { type: Boolean, default: false },
   public: { type: Boolean, default: false },
   done: { type: Boolean, default: false },
 });
