@@ -603,6 +603,7 @@ const portalUserSessionSchema = new Schema({
   booking_ref: String,
   booking_date: String,
   client_name: String,
+  client_phone: String,
   product_title: String,
   session_actions: { type: [portalUserActionSchema], default: [] },
   device_info: Object,
