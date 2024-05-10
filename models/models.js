@@ -184,6 +184,13 @@ const vehicleSchema = new Schema({
     ],
     default: [],
   },
+  platform_entry_required: {
+    type: Boolean,
+    required: true,
+  },
+  platform_entries: {
+    type: [String],
+  },
 });
 vehicleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
