@@ -440,6 +440,7 @@ const tourGroupSchema = new Schema({
     type: Number,
     default: 1,
   },
+  vehicle_platform_entry: String,
 });
 
 //TODO temporary //unset product when is fixed in all apps
