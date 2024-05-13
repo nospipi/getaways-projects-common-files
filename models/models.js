@@ -161,6 +161,7 @@ const vehicleSchema = new Schema({
     type: String,
     required: true,
   },
+  max_capacity: Number,
   color: {
     type: String,
     required: true,
