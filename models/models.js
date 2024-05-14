@@ -346,6 +346,8 @@ const productsSchema = new Schema(
     crewGroups: { type: [String], default: [] },
     crewRoles: { type: [String], default: [] },
     isPrivate: { type: Boolean, required: true },
+    requiresVehicle: { type: Boolean, required: true },
+    requiresPlatformEntry: { type: Boolean, required: true },
     isGuided: { type: Boolean, required: true },
     pickupIncluded: { type: Boolean, required: true },
     review_link: { type: String },
