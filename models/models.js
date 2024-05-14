@@ -275,6 +275,8 @@ const productsSchema = new Schema(
           bokun_code: String,
           is_private: { type: Boolean, required: true },
           is_guided: { type: Boolean, required: true },
+          requires_vehicle: { type: Boolean, required: true },
+          requires_platformEntry: { type: Boolean, required: true },
         },
       ],
     },
@@ -346,8 +348,7 @@ const productsSchema = new Schema(
     crewGroups: { type: [String], default: [] },
     crewRoles: { type: [String], default: [] },
     isPrivate: { type: Boolean, required: true },
-    requiresVehicle: { type: Boolean, required: true },
-    requiresPlatformEntry: { type: Boolean, required: true },
+
     isGuided: { type: Boolean, required: true },
     pickupIncluded: { type: Boolean, required: true },
     review_link: { type: String },
