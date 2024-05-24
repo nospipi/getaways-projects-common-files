@@ -122,6 +122,7 @@ const userSchema = new Schema(
     isAdmin: Boolean,
     isModerator: Boolean,
     onOfficeDuty: Boolean,
+    isEmergencyContact: Boolean,
     permissions: Object,
   },
   {
