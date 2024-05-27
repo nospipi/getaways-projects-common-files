@@ -390,6 +390,7 @@ const bookingSchema = new Schema(
     option_id: { type: String },
     start_time_id: { type: String },
     product_time_slot: { type: String },
+    bokun_start_time_id: { type: String, default: "" },
     name: { type: String, default: "" },
     count: { type: Number, default: 1 },
     client_name: { type: String },
