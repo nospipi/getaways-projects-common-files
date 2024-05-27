@@ -331,6 +331,7 @@ const productsSchema = new Schema(
             type: [
               {
                 time_slot: String,
+                label: String,
                 bokun_start_time_id: String,
                 start: String,
                 end: String,
