@@ -327,7 +327,6 @@ const productsSchema = new Schema(
       type: [
         {
           time_slot: String,
-          bokun_id: String,
           date_ranges: {
             type: [
               {
@@ -555,7 +554,6 @@ const taskSchema = new Schema(
     vehicle_id: String,
     pickups: [pickupSchema],
     details: String,
-    tour_group_id: String,
     author_id: { type: String, required: true },
   },
   {
