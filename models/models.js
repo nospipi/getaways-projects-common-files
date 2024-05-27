@@ -327,6 +327,7 @@ const productsSchema = new Schema(
       type: [
         {
           time_slot: String,
+          bokun_id: String,
           date_ranges: {
             type: [
               {
