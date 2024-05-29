@@ -382,13 +382,14 @@ const channelsSchema = new Schema({
 const bookingSchema = new Schema(
   {
     ref: { type: String, default: "" },
+    channel_id: { type: String, default: "" },
     order_number: { type: String, default: "" },
     booking_date: { type: String },
     date: { type: String },
     product: { type: Object },
     product_id: { type: String },
     option_id: { type: String },
-    start_time_id: { type: String },
+    start_time_id: { type: String, default: "" }, //to inform tour group builder
     product_time_slot: { type: String },
     name: { type: String, default: "" },
     count: { type: Number, default: 1 },
