@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
-const { Schema, model } = mongoose;
-const _ = require("lodash");
-const mongoosePaginate = require("mongoose-paginate-v2");
-const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2");
-const mongoosastic = require("mongoosastic");
-const moment = require("moment");
+const mongoose = require("mongoose")
+const uniqueValidator = require("mongoose-unique-validator")
+const { Schema, model } = mongoose
+const _ = require("lodash")
+const mongoosePaginate = require("mongoose-paginate-v2")
+const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2")
+const mongoosastic = require("mongoosastic")
+const moment = require("moment")
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
 // npm install https://github.com/nospipi/getaways-projects-common-files
@@ -33,10 +33,10 @@ const activitySchema = new Schema({
     type: Array,
     required: true,
   },
-});
+})
 activitySchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-});
+})
 
 const groupSchema = new Schema({
   title: {
@@ -45,11 +45,11 @@ const groupSchema = new Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-});
+})
 
 groupSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-});
+})
 
 const roleSchema = new Schema({
   title: {
@@ -58,11 +58,11 @@ const roleSchema = new Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-});
+})
 
 roleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-});
+})
 
 const userSchema = new Schema(
   {
@@ -129,15 +129,15 @@ const userSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 userSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-}); //https://www.npmjs.com/package/mongoose-unique-validator
+}) //https://www.npmjs.com/package/mongoose-unique-validator
 
 const frequentMeetingPointSchema = new Schema({
   name: String,
   frequency: Number,
-});
+})
 
 const balanceSchema = new Schema({
   user: {
@@ -149,7 +149,7 @@ const balanceSchema = new Schema({
   amount: { type: Number, required: true },
   type: { type: String, required: true },
   receiptUrl: { type: String },
-});
+})
 
 const vehicleSchema = new Schema({
   plate: {
@@ -190,10 +190,10 @@ const vehicleSchema = new Schema({
     type: Boolean,
     required: true,
   },
-});
+})
 vehicleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-});
+})
 
 const announcementSchema = new Schema({
   title: { type: String, required: true },
@@ -206,9 +206,9 @@ const announcementSchema = new Schema({
   critical: { type: Boolean, required: true },
   pinned: { type: Boolean, default: false },
   author: { type: String, required: true },
-});
+})
 
-announcementSchema.plugin(mongoosePaginate);
+announcementSchema.plugin(mongoosePaginate)
 
 const bugReportSchema = new Schema({
   body: {
@@ -217,7 +217,7 @@ const bugReportSchema = new Schema({
   },
   user: String,
   date: { type: Date, default: Date.now },
-});
+})
 
 const requestSchema = new Schema({
   requestedBy: { type: Object, required: true },
@@ -243,7 +243,7 @@ const requestSchema = new Schema({
   closed: { type: Boolean, default: false },
   granted: { type: Boolean, default: false },
   created_at: { type: Date, default: Date.now },
-});
+})
 
 const meetingPointSchema = new Schema(
   {
@@ -258,7 +258,7 @@ const meetingPointSchema = new Schema(
   {
     minimize: false,
   }
-);
+)
 
 const productsSchema = new Schema(
   {
@@ -361,23 +361,23 @@ const productsSchema = new Schema(
   {
     minimize: false,
   }
-);
+)
 
 productsSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-}); //https://www.npmjs.com/package/mongoose-unique-validator
+}) //https://www.npmjs.com/package/mongoose-unique-validator
 
 // Pre-save middleware to set the slug based on platform_product_name
 productsSchema.pre("save", function (next) {
   if (this.platform_product_name) {
-    this.slug = _.kebabCase(this.platform_product_name);
+    this.slug = _.kebabCase(this.platform_product_name)
   }
-  next();
-});
+  next()
+})
 
 const channelsSchema = new Schema({
   title: { type: String, required: true },
-});
+})
 
 const bookingSchema = new Schema(
   {
@@ -390,7 +390,6 @@ const bookingSchema = new Schema(
     option_id: { type: String },
     start_time_id: { type: String },
     product_time_slot: { type: String },
-    bokun_start_time_id: { type: String, default: "" },
     name: { type: String, default: "" },
     count: { type: Number, default: 1 },
     client_name: { type: String },
@@ -421,9 +420,9 @@ const bookingSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
-bookingSchema.plugin(mongoosastic);
-bookingSchema.plugin(mongoosePaginate);
+)
+bookingSchema.plugin(mongoosastic)
+bookingSchema.plugin(mongoosePaginate)
 
 const tourGroupSchema = new Schema({
   product_id: String,
@@ -449,18 +448,18 @@ const tourGroupSchema = new Schema({
     default: 1,
   },
   vehicle_platform_entry: String,
-});
+})
 
 //TODO temporary //unset product when is fixed in all apps
 tourGroupSchema.pre("save", function (next) {
   if (this.product_id && !this.product) {
-    this.product = this.product_id;
+    this.product = this.product_id
   }
-  next();
-});
+  next()
+})
 
-tourGroupSchema.plugin(mongoosePaginate);
-tourGroupSchema.plugin(mongooseAggregatePaginate);
+tourGroupSchema.plugin(mongoosePaginate)
+tourGroupSchema.plugin(mongooseAggregatePaginate)
 
 const userDayScheduleSchema = new Schema(
   {
@@ -490,10 +489,10 @@ const userDayScheduleSchema = new Schema(
   {
     minimize: false,
   }
-);
+)
 
-userDayScheduleSchema.plugin(mongoosePaginate);
-userDayScheduleSchema.plugin(mongooseAggregatePaginate);
+userDayScheduleSchema.plugin(mongoosePaginate)
+userDayScheduleSchema.plugin(mongooseAggregatePaginate)
 
 const notificationSchema = new Schema({
   title: { type: String, required: true },
@@ -505,8 +504,8 @@ const notificationSchema = new Schema({
       type: { type: String, default: "" },
     },
   },
-});
-notificationSchema.plugin(mongoosePaginate);
+})
+notificationSchema.plugin(mongoosePaginate)
 
 const PwaPushSubscriptionSchema = new mongoose.Schema({
   endpoint: String,
@@ -514,12 +513,12 @@ const PwaPushSubscriptionSchema = new mongoose.Schema({
     p256dh: String,
     auth: String,
   },
-});
+})
 
 const taskGuestSchema = new Schema({
   name: { type: String, default: "" },
   count: { type: Number, default: 1 },
-});
+})
 
 const pickupSchema = new Schema({
   meeting_point: String,
@@ -528,7 +527,7 @@ const pickupSchema = new Schema({
   lat: Number,
   lon: Number,
   guests: [taskGuestSchema],
-});
+})
 
 const scheduleTaskSchema = new Schema(
   {
@@ -544,10 +543,10 @@ const scheduleTaskSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 
-scheduleTaskSchema.plugin(mongoosePaginate);
-scheduleTaskSchema.plugin(mongooseAggregatePaginate);
+scheduleTaskSchema.plugin(mongoosePaginate)
+scheduleTaskSchema.plugin(mongooseAggregatePaginate)
 
 const taskSchema = new Schema(
   {
@@ -563,18 +562,18 @@ const taskSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 
-taskSchema.plugin(mongoosePaginate);
-taskSchema.plugin(mongooseAggregatePaginate);
+taskSchema.plugin(mongoosePaginate)
+taskSchema.plugin(mongooseAggregatePaginate)
 
 const todoSchema = new Schema({
   body: { type: String, required: true },
   date: { type: String, required: true },
   author: { type: String, required: true },
   completedBy: { type: String, default: null },
-});
-todoSchema.plugin(mongoosePaginate);
+})
+todoSchema.plugin(mongoosePaginate)
 
 const noteSchema = new Schema({
   body: { type: String, required: true },
@@ -586,9 +585,9 @@ const noteSchema = new Schema({
   pinned: { type: Boolean, default: false },
   public: { type: Boolean, default: false },
   done: { type: Boolean, default: false },
-});
-noteSchema.plugin(mongoosePaginate);
-noteSchema.plugin(mongooseAggregatePaginate);
+})
+noteSchema.plugin(mongoosePaginate)
+noteSchema.plugin(mongooseAggregatePaginate)
 
 const appVersionSchema = new Schema({
   version: { type: String, required: true },
@@ -597,19 +596,19 @@ const appVersionSchema = new Schema({
   shouldBeForcedUpdate: { type: Boolean, required: true },
   ios: Boolean,
   android: Boolean,
-});
+})
 
 const g4sTrackingSessionCredentialsSchema = new Schema({
   username: String,
   password: String,
   UserIdGuid: String,
   SessionId: String,
-});
+})
 
 const portalUserActionSchema = new Schema({
   date_time: { type: Date, default: Date.now },
   user_action: String,
-});
+})
 
 const portalUserSessionSchema = new Schema({
   date_time: { type: Date, default: Date.now },
@@ -621,9 +620,9 @@ const portalUserSessionSchema = new Schema({
   session_actions: { type: [portalUserActionSchema], default: [] },
   device_info: Object,
   sessionDurationInSeconds: Number,
-});
-portalUserSessionSchema.plugin(mongoosePaginate);
-portalUserSessionSchema.plugin(mongooseAggregatePaginate);
+})
+portalUserSessionSchema.plugin(mongoosePaginate)
+portalUserSessionSchema.plugin(mongooseAggregatePaginate)
 
 const vehicleServiceLogEntrySchema = new Schema({
   vehicle_id: String,
@@ -634,8 +633,8 @@ const vehicleServiceLogEntrySchema = new Schema({
   cost: String,
   repairs: [String],
   notes: String,
-});
-vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
+})
+vehicleServiceLogEntrySchema.plugin(mongoosePaginate)
 
 const bokunDataSchema = new Schema({
   action: String,
@@ -645,12 +644,12 @@ const bokunDataSchema = new Schema({
     type: String,
     default: moment().format("YYYY-MM-DD HH:mm:ss"),
   },
-});
+})
 
 const messageDraftSchema = new Schema({
   title: String,
   body: String,
-});
+})
 
 //--------------------------------------------------------------
 
@@ -696,4 +695,4 @@ module.exports = {
   ),
   BokunDataModel: model("bokun_data", bokunDataSchema),
   MessageDraftModel: model("message_draft", messageDraftSchema),
-};
+}
