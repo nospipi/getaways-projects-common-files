@@ -382,15 +382,14 @@ const channelsSchema = new Schema({
 const bookingSchema = new Schema(
   {
     ref: { type: String, default: "" },
-    channel_id: { type: String, default: "" },
     order_number: { type: String, default: "" },
-    booking_date: { type: String },
-    date: { type: String },
-    product: { type: Object },
-    product_id: { type: String },
-    option_id: { type: String },
+    product_id: { type: String, default: "" },
+    option_id: { type: String, default: "" },
+    channel_id: { type: String, default: "" },
     start_time_id: { type: String, default: "" }, //to inform tour group builder
     product_time_slot: { type: String },
+    booking_date: { type: String },
+    date: { type: String },
     name: { type: String, default: "" },
     count: { type: Number, default: 1 },
     client_name: { type: String },
@@ -401,7 +400,6 @@ const bookingSchema = new Schema(
     client_location: { type: String, default: "" },
     pickup_location: meetingPointSchema,
     pickup_time: { type: String, default: "" },
-    channel: { type: Object, default: {} },
     client_messaged: { type: Boolean, default: false },
     client_response_status: { type: String, default: "PENDING" },
     notes: { type: String, default: "" },
