@@ -654,6 +654,13 @@ const messageDraftSchema = new Schema({
 const ticketsAvailabilitySchema = new Schema({
   place: String,
   placedate: String,
+  slots: [
+    {
+      zone: String,
+      id: String,
+      avail: String,
+    },
+  ],
 })
 
 //--------------------------------------------------------------
