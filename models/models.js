@@ -651,6 +651,11 @@ const messageDraftSchema = new Schema({
   body: String,
 })
 
+const ticketsAvailabilitySchema = new Schema({
+  place: String,
+  placedate: String,
+})
+
 //--------------------------------------------------------------
 
 module.exports = {
@@ -695,4 +700,8 @@ module.exports = {
   ),
   BokunDataModel: model("bokun_data", bokunDataSchema),
   MessageDraftModel: model("message_draft", messageDraftSchema),
+  TicketsAvailabilityModel: model(
+    "tickets_availability",
+    ticketsAvailabilitySchema
+  ),
 }
