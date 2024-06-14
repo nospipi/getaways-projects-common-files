@@ -663,6 +663,16 @@ const ticketsAvailabilitySchema = new Schema({
   ],
 })
 
+const availabilityToolVisitorSchema = new Schema({
+  ip: String,
+  city: String,
+  country: String,
+  latitude: String,
+  longitude: String,
+  region: String,
+  timestamp: String,
+})
+
 //--------------------------------------------------------------
 
 module.exports = {
@@ -710,5 +720,9 @@ module.exports = {
   TicketsAvailabilityModel: model(
     "tickets_availability",
     ticketsAvailabilitySchema
+  ),
+  AvailabilityToolVisitorModel: model(
+    "availability_tool_visitor",
+    availabilityToolVisitorSchema
   ),
 }
