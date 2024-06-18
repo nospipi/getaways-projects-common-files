@@ -550,6 +550,7 @@ scheduleTaskSchema.plugin(mongooseAggregatePaginate)
 const taskSchema = new Schema(
   {
     product: { type: String, required: true },
+    option_id: { type: String, required: true },
     date: { type: String, required: true },
     assignees: Array,
     vehicle_id: String,
@@ -654,6 +655,7 @@ const messageDraftSchema = new Schema({
 const ticketsAvailabilitySchema = new Schema({
   place: String,
   placedate: String,
+  id: String,
   slots: [
     {
       zone: String,
@@ -661,6 +663,11 @@ const ticketsAvailabilitySchema = new Schema({
       avail: String,
     },
   ],
+})
+
+ticketsAvailabilitySchema.pre("save", function (next) {
+  this.id = this.place + this.placedate
+  next()
 })
 
 const availabilityToolVisitorSchema = new Schema({
