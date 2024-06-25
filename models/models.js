@@ -426,6 +426,7 @@ bookingSchema.plugin(mongoosePaginate)
 const tourGroupSchema = new Schema({
   product_id: String,
   option_id: String,
+  start_time_id: String,
   product: String,
   date: String,
   time: String,
