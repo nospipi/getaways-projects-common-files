@@ -501,7 +501,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
 
   const lastUpdated =
     updatedValues.updated_at[updatedValues.updated_at.length - 1]
-  lastUpdated.changes = getFormattedChangedValues(updatedValues, old)
+  lastUpdated.changes = Diff.diff(old, updatedValues)
 
   console.log("old", old)
   console.log("updatedValues", updatedValues)
