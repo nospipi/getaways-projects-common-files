@@ -6,7 +6,7 @@ const mongoosePaginate = require("mongoose-paginate-v2")
 const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2")
 const mongoosastic = require("mongoosastic")
 const moment = require("moment")
-const Diff = require("deep-diff")
+const deepDiff = require("deep-diff").diff
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
 // npm install https://github.com/nospipi/getaways-projects-common-files
@@ -495,27 +495,54 @@ bookingSchema.plugin(mongoosePaginate)
 // }
 // next()
 
+// bookingSchema.pre("findOneAndUpdate", async function (next) {
+//   try {
+//     //log old values
+//     const initialValues = this.getQuery()
+//     const updatedValues = this.getUpdate()
+
+//     const old = await this.model.findOne(initialValues).lean()
+//     const lastUpdated =
+//       updatedValues.updated_at[updatedValues.updated_at.length - 1]
+//     //lastUpdated.changes = Diff.diff(old, updatedValues)
+//     const changes = getFormattedChangedValues(updatedValues, old)
+//     console.log("changes", changes)
+
+//     // console.log("old", old)
+//     // console.log("updatedValues", updatedValues)
+
+//     next()
+//   } catch (err) {
+//     console.log(err)
+//     next(err)
+//   }
+// })
+
 bookingSchema.pre("findOneAndUpdate", async function (next) {
   try {
-    //log old values
+    // Log old values
     const initialValues = this.getQuery()
     const updatedValues = this.getUpdate()
-
-    const old = await this.model.findOne(initialValues)
-    console.log("typeof old", typeof old)
-
-    const oldObj = old.toObject()
-
-    const lastUpdated =
-      updatedValues.updated_at[updatedValues.updated_at.length - 1]
-    //lastUpdated.changes = Diff.diff(old, updatedValues)
-    const changes = getFormattedChangedValues(updatedValues, old)
-    console.log("changes", changes)
-
-    // console.log("old", old)
-    // console.log("updatedValues", updatedValues)
+    const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
 
     next()
+
+    // Compare old and updated values
+    const differences = deepDiff(old, updatedValues)
+
+    if (differences) {
+      const changes = {}
+      differences.forEach((diff) => {
+        const path = diff.path.join(".") // Convert path array to dot notation string
+        changes[path] = {
+          before: diff.lhs,
+          after: diff.rhs,
+        }
+      })
+
+      console.log("Changes:", changes)
+      // Now `changes` object contains all the differences in the format you specified
+    }
   } catch (err) {
     console.log(err)
     next(err)
