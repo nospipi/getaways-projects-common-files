@@ -549,8 +549,9 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
         before: diff.lhs,
         after: diff.rhs,
       }))
-      lastUpdated.changes = changes
-      //console.log("Changes:", changes)
+      //lastUpdated.changes = changes
+      console.log("last updated", lastUpdated)
+      console.log("Changes:", changes)
     }
 
     next()
