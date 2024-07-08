@@ -501,11 +501,14 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
     const updatedValues = this.getUpdate()
 
     const old = await this.model.findOne(initialValues)
+    console.log("typeof old", typeof old)
+
+    const oldObj = old.toObject()
 
     const lastUpdated =
       updatedValues.updated_at[updatedValues.updated_at.length - 1]
     //lastUpdated.changes = Diff.diff(old, updatedValues)
-    const changes = getFormattedChangedValues(updatedValues, old)
+    const changes = getFormattedChangedValues(updatedValues, oldObj)
     console.log("changes", changes)
 
     // console.log("old", old)
