@@ -513,8 +513,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
         after: diff.rhs,
       }))
       console.log("changes", changes)
-      const lastUpdated =
-        updatedValues.updated_at[updatedValues.updated_at.length - 1]
+      const lastUpdated = updatedValues.updated_at.slice(-1)[0]
       console.log("lastUpdated", lastUpdated)
       //lastUpdated.changes = changes
     }
