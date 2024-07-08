@@ -492,7 +492,7 @@ bookingSchema.plugin(mongoosePaginate)
 // }
 // next()
 
-bookingSchema.pre("save", function (next) {
+bookingSchema.pre("findOneAndUpdate", function (next) {
   //log old values
   const initialValues = this.isNew ? {} : this._original
   const updatedValues = this.toObject()
