@@ -499,8 +499,8 @@ bookingSchema.pre("findOneAndUpdate", function (next) {
 
   //const lastUpdated = this.updated_at[this.updated_at.length - 1]
 
-  lastUpdated.old = initialValues
-  lastUpdated.new = updatedValues
+  // lastUpdated.old = initialValues
+  // lastUpdated.new = updatedValues
 
   console.log("initialValues", initialValues)
   console.log("updatedValues", updatedValues)
