@@ -493,20 +493,27 @@ bookingSchema.plugin(mongoosePaginate)
 // next()
 
 bookingSchema.pre("findOneAndUpdate", async function (next) {
-  //log old values
-  const initialValues = this.getQuery()
-  const updatedValues = this.getUpdate()
+  try {
+    //log old values
+    const initialValues = this.getQuery()
+    const updatedValues = this.getUpdate()
 
-  const old = await this.model.findOne(initialValues)
+    const old = await this.model.findOne(initialValues)
 
-  const lastUpdated =
-    updatedValues.updated_at[updatedValues.updated_at.length - 1]
-  lastUpdated.changes = Diff.diff(old, updatedValues)
+    const lastUpdated =
+      updatedValues.updated_at[updatedValues.updated_at.length - 1]
+    //lastUpdated.changes = Diff.diff(old, updatedValues)
+    const changes = getFormattedChangedValues(updatedValues, old)
+    console.log("changes", changes)
 
-  console.log("old", old)
-  console.log("updatedValues", updatedValues)
+    // console.log("old", old)
+    // console.log("updatedValues", updatedValues)
 
-  next()
+    next()
+  } catch (err) {
+    console.log(err)
+    next(err)
+  }
 })
 
 const tourGroupSchema = new Schema({
