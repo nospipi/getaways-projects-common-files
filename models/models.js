@@ -491,7 +491,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
     delete old.__v
     delete old._id
     delete old.pickup_location._id
-    //delete old.updated_at
+    delete old.updated_at
 
     const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
       (obj, key) => {
@@ -512,9 +512,11 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
         before: diff.lhs,
         after: diff.rhs,
       }))
-      const lastUpdated =
-        updatedValues.updated_at[updatedValues.updated_at.length - 1]
-      lastUpdated.changes = changes
+      console.log("changes", changes)
+      console.log("updatedValues", updatedValues)
+      // const lastUpdated =
+      //   updatedValues.updated_at[updatedValues.updated_at.length - 1]
+      // lastUpdated.changes = changes
     }
 
     next()
