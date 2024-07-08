@@ -511,7 +511,6 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
 
       if (Array.isArray(updatedValues.updated_at)) {
         const lastUpdated = updatedValues.updated_at.slice(-1)[0]
-        console.log("lastUpdated", lastUpdated)
         lastUpdated.changes = changes
       }
     }
