@@ -524,8 +524,8 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
     const initialValues = this.getQuery()
     const updatedValues = this.getUpdate()
     const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
-
-    next()
+    delete old.__v
+    delete old._id
 
     // Compare old and updated values
     const differences = deepDiff(old, updatedValues)
@@ -543,6 +543,8 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
       console.log("Changes:", changes)
       // Now `changes` object contains all the differences in the format you specified
     }
+
+    next()
   } catch (err) {
     console.log(err)
     next(err)
