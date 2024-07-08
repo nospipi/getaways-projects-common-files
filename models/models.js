@@ -523,28 +523,35 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
     // Log old values
     const initialValues = this.getQuery()
     const updatedValues = this.getUpdate()
+
+    // Exclude __v and _id fields from old object
     const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
     delete old.__v
     delete old._id
 
+    next()
+
+    // Exclude __v and _id fields from updatedValues object
+    const updatedWithoutIdAndV = {}
+    Object.keys(updatedValues).forEach((key) => {
+      if (key !== "__v" && key !== "_id") {
+        updatedWithoutIdAndV[key] = updatedValues[key]
+      }
+    })
+
     // Compare old and updated values
-    const differences = deepDiff(old, updatedValues)
+    const differences = deepDiff(old, updatedWithoutIdAndV)
 
     if (differences) {
-      const changes = {}
-      differences.forEach((diff) => {
-        const path = diff.path.join(".") // Convert path array to dot notation string
-        changes[path] = {
-          before: diff.lhs,
-          after: diff.rhs,
-        }
-      })
+      const changes = differences.map((diff) => ({
+        path: diff.path.join("."),
+        before: diff.lhs,
+        after: diff.rhs,
+      }))
 
       console.log("Changes:", changes)
-      // Now `changes` object contains all the differences in the format you specified
+      // Now `changes` array contains all the differences in the format you specified
     }
-
-    next()
   } catch (err) {
     console.log(err)
     next(err)
