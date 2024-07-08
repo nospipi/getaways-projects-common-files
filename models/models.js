@@ -480,47 +480,47 @@ const bookingSchema = new Schema(
 bookingSchema.plugin(mongoosastic)
 bookingSchema.plugin(mongoosePaginate)
 
-bookingSchema.pre("findOneAndUpdate", async function (next) {
-  try {
-    const initialValues = this.getQuery()
-    const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
-    delete old.__v
-    delete old._id
-    delete old.pickup_location._id
-    delete old.updated_at
+// bookingSchema.pre("findOneAndUpdate", async function (next) {
+//   try {
+//     const initialValues = this.getQuery()
+//     const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
+//     delete old.__v
+//     delete old._id
+//     delete old.pickup_location._id
+//     delete old.updated_at
 
-    const updatedValues = this.getUpdate()
-    const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
-      (obj, key) => {
-        if (key !== "__v" && key !== "_id" && key !== "updated_at") {
-          obj[key] = updatedValues[key]
-        }
-        return obj
-      },
-      {}
-    )
+//     const updatedValues = this.getUpdate()
+//     const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
+//       (obj, key) => {
+//         if (key !== "__v" && key !== "_id" && key !== "updated_at") {
+//           obj[key] = updatedValues[key]
+//         }
+//         return obj
+//       },
+//       {}
+//     )
 
-    const differences = deepDiff(old, updatedValuesWithExclusions)
+//     const differences = deepDiff(old, updatedValuesWithExclusions)
 
-    if (differences) {
-      const changes = differences.map((diff) => ({
-        path: diff.path.join("."),
-        before: diff.lhs,
-        after: diff.rhs,
-      }))
+//     if (differences) {
+//       const changes = differences.map((diff) => ({
+//         path: diff.path.join("."),
+//         before: diff.lhs,
+//         after: diff.rhs,
+//       }))
 
-      if (Array.isArray(updatedValues.updated_at)) {
-        const lastUpdated = updatedValues.updated_at.slice(-1)[0]
-        lastUpdated.changes = changes
-      }
-    }
+//       if (Array.isArray(updatedValues.updated_at)) {
+//         const lastUpdated = updatedValues.updated_at.slice(-1)[0]
+//         lastUpdated.changes = changes
+//       }
+//     }
 
-    next()
-  } catch (err) {
-    console.log("ERROR FROM PRE MIDDLEWARE IN BOOKING SCHEMA", err)
-    next(err)
-  }
-})
+//     next()
+//   } catch (err) {
+//     console.log("ERROR FROM PRE MIDDLEWARE IN BOOKING SCHEMA", err)
+//     next(err)
+//   }
+// })
 
 const tourGroupSchema = new Schema({
   product_id: String,
