@@ -526,14 +526,12 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
 
     // Exclude __v and _id fields from old object
     const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
-    console.log("old", old.updated_at)
+    const updated_at = old.updated_at
     delete old.__v
     delete old._id
     delete old.pickup_location._id
     delete old.updated_at
-
-    next()
-
+    console.log("updated_at", updated_at)
     // Exclude __v and _id fields from updatedValues object
     const updatedWithoutIdAndV = {}
     Object.keys(updatedValues).forEach((key) => {
@@ -555,6 +553,8 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
       //console.log("Changes:", changes)
       // Now `changes` array contains all the differences in the format you specified
     }
+
+    next()
   } catch (err) {
     console.log(err)
     next(err)
