@@ -533,15 +533,18 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
     delete old.pickup_location._id
     delete old.updated_at
 
-    const updatedWithoutIdAndV = {}
-    Object.keys(updatedValues).forEach((key) => {
-      if (key !== "__v" && key !== "_id" && key !== "updated_at") {
-        updatedWithoutIdAndV[key] = updatedValues[key]
-      }
-    })
+    const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
+      (obj, key) => {
+        if (key !== "__v" && key !== "_id" && key !== "updated_at") {
+          obj[key] = updatedValues[key]
+        }
+        return obj
+      },
+      {}
+    )
 
     // Compare old and updated values
-    const differences = deepDiff(old, updatedWithoutIdAndV)
+    const differences = deepDiff(old, updatedValuesWithExclusions)
 
     if (differences) {
       const changes = differences.map((diff) => ({
@@ -549,7 +552,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
         before: diff.lhs,
         after: diff.rhs,
       }))
-      //lastUpdated.changes = changes
+      lastUpdated.changes = changes
       console.log("last updated", lastUpdated)
       console.log("Changes:", changes)
     }
