@@ -497,6 +497,11 @@ bookingSchema.pre("save", function (next) {
   const initialValues = this.isNew ? {} : this._original
   const updatedValues = this.toObject()
 
+  const lastUpdated = this.updated_at[this.updated_at.length - 1]
+
+  lastUpdated.old = initialValues
+  lastUpdated.new = updatedValues
+
   console.log("initialValues", initialValues)
   console.log("updatedValues", updatedValues)
 })
