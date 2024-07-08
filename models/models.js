@@ -557,7 +557,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
 
     next()
   } catch (err) {
-    console.log(err)
+    console.log("ERROR FROM PRE MIDDLEWARE IN BOOKING SCHEMA", err)
     next(err)
   }
 })
