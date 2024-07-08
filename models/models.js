@@ -33,6 +33,8 @@ const getAllChangedValues = (changes, path = "") => {
 
 // Function to get all changed values in a formatted object
 const getFormattedChangedValues = (values, initialValues) => {
+  console.log("new values", values)
+  console.log("old values", initialValues)
   const differences = Diff.diff(initialValues, values)
 
   if (!differences) {
