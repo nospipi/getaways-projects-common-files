@@ -494,8 +494,8 @@ bookingSchema.plugin(mongoosePaginate)
 
 bookingSchema.pre("findOneAndUpdate", function (next) {
   //log old values
-  const initialValues = this.isNew ? {} : this._original
-  const updatedValues = this.toObject()
+  const initialValues = this.getQuery()
+  const updatedValues = this.getUpdate()
 
   const lastUpdated = this.updated_at[this.updated_at.length - 1]
 
