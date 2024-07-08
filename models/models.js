@@ -522,8 +522,6 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
   try {
     const initialValues = this.getQuery()
     const updatedValues = this.getUpdate()
-    const lastUpdated =
-      updatedValues.updated_at[updatedValues.updated_at.length - 1]
 
     // Exclude __v and _id fields from old object
     const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
@@ -552,9 +550,9 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
         before: diff.lhs,
         after: diff.rhs,
       }))
+      const lastUpdated =
+        updatedValues.updated_at[updatedValues.updated_at.length - 1]
       lastUpdated.changes = changes
-      console.log("last updated", lastUpdated)
-      console.log("Changes:", changes)
     }
 
     next()
