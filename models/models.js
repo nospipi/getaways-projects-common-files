@@ -506,6 +506,8 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
 
   console.log("old", old)
   console.log("updatedValues", updatedValues)
+
+  next()
 })
 
 const tourGroupSchema = new Schema({
