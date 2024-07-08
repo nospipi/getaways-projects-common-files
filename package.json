@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "deep-diff": "^1.0.2",
     "lodash": "^4.17.21",
     "mongoosastic": "^5.0.0",
     "mongoose": "^6.8.3",

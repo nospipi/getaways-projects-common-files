@@ -6,9 +6,63 @@ const mongoosePaginate = require("mongoose-paginate-v2")
 const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2")
 const mongoosastic = require("mongoosastic")
 const moment = require("moment")
+const Diff = require("deep-diff")
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
 // npm install https://github.com/nospipi/getaways-projects-common-files
+
+// Function to recursively get all changed values
+const getAllChangedValues = (changes, path = "") => {
+  return changes.reduce((acc, change) => {
+    const fullPath = path
+      ? `${path}.${change.path.join(".")}`
+      : change.path.join(".")
+    if (change.kind === "E") {
+      acc.push({
+        path: fullPath,
+        before: change.lhs,
+        after: change.rhs,
+      })
+    } else if (change.kind === "A") {
+      const nestedChanges = getAllChangedValues(change.item, fullPath)
+      acc = acc.concat(nestedChanges)
+    }
+    return acc
+  }, [])
+}
+
+// Function to get all changed values in a formatted object
+const getFormattedChangedValues = (values, initialValues) => {
+  const differences = Diff.diff(initialValues, values)
+
+  if (!differences) {
+    return {}
+  }
+
+  const changedValues = getAllChangedValues(differences)
+
+  // Convert array of changes into object with before and after values
+  const formattedValues = changedValues.reduce((acc, change) => {
+    const keys = change.path.split(".")
+    let current = acc
+    keys.forEach((key, index) => {
+      if (!current[key]) {
+        current[key] = {}
+      }
+      if (index === keys.length - 1) {
+        current[key] = {
+          before: change.before,
+          after: change.after,
+        }
+      } else {
+        current = current[key]
+      }
+    })
+    return acc
+  }, {})
+
+  return formattedValues
+}
 
 //-------------------------------------------------------------------------------
 
@@ -422,6 +476,30 @@ const bookingSchema = new Schema(
 )
 bookingSchema.plugin(mongoosastic)
 bookingSchema.plugin(mongoosePaginate)
+
+//compare the changes between the initial and the new data
+//add a "changes" field in last updated_at array item
+//dont push a new one, just add a changes field in the last one
+//and dont modify any of its values just add a field
+// dont add the field if its a new one
+
+// if (!this.isNew) {
+//   const lastUpdated = this.updated_at[this.updated_at.length - 1]
+//   const changes = getFormattedChangedValues(this, lastUpdated)
+//   if (Object.keys(changes).length) {
+//     lastUpdated.changes = changes
+//   }
+// }
+// next()
+
+bookingSchema.pre("save", function (next) {
+  //log old values
+  const initialValues = this.isNew ? {} : this._original
+  const updatedValues = this.toObject()
+
+  console.log("initialValues", initialValues)
+  console.log("updatedValues", updatedValues)
+})
 
 const tourGroupSchema = new Schema({
   product_id: String,
