@@ -492,12 +492,12 @@ bookingSchema.plugin(mongoosePaginate)
 // }
 // next()
 
-bookingSchema.pre("findOneAndUpdate", function (next) {
+bookingSchema.pre("findOneAndUpdate", async function (next) {
   //log old values
   const initialValues = this.getQuery()
   const updatedValues = this.getUpdate()
 
-  const old = this.model.findOne(this.getQuery())
+  const old = await this.model.findOne(initialValues)
 
   //const lastUpdated = this.updated_at[this.updated_at.length - 1]
 
