@@ -535,7 +535,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
 
     const updatedWithoutIdAndV = {}
     Object.keys(updatedValues).forEach((key) => {
-      if (key !== "__v" && key !== "_id") {
+      if (key !== "__v" && key !== "_id" && key !== "updated_at") {
         updatedWithoutIdAndV[key] = updatedValues[key]
       }
     })
