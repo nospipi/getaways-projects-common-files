@@ -483,17 +483,13 @@ bookingSchema.plugin(mongoosePaginate)
 bookingSchema.pre("findOneAndUpdate", async function (next) {
   try {
     const initialValues = this.getQuery()
-
-    // Exclude __v and _id fields from old object
     const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
-
     delete old.__v
     delete old._id
     delete old.pickup_location._id
     delete old.updated_at
 
     const updatedValues = this.getUpdate()
-
     const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
       (obj, key) => {
         if (key !== "__v" && key !== "_id" && key !== "updated_at") {
@@ -504,7 +500,6 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
       {}
     )
 
-    // Compare old and updated values
     const differences = deepDiff(old, updatedValuesWithExclusions)
 
     if (differences) {
@@ -513,15 +508,12 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
         before: diff.lhs,
         after: diff.rhs,
       }))
-      console.log("changes", changes)
 
       if (Array.isArray(updatedValues.updated_at)) {
         const lastUpdated = updatedValues.updated_at.slice(-1)[0]
         console.log("lastUpdated", lastUpdated)
         lastUpdated.changes = changes
       }
-
-      //lastUpdated.changes = changes
     }
 
     next()
