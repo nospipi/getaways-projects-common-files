@@ -480,44 +480,6 @@ const bookingSchema = new Schema(
 bookingSchema.plugin(mongoosastic)
 bookingSchema.plugin(mongoosePaginate)
 
-//compare the changes between the initial and the new data
-//add a "changes" field in last updated_at array item
-//dont push a new one, just add a changes field in the last one
-//and dont modify any of its values just add a field
-// dont add the field if its a new one
-
-// if (!this.isNew) {
-//   const lastUpdated = this.updated_at[this.updated_at.length - 1]
-//   const changes = getFormattedChangedValues(this, lastUpdated)
-//   if (Object.keys(changes).length) {
-//     lastUpdated.changes = changes
-//   }
-// }
-// next()
-
-// bookingSchema.pre("findOneAndUpdate", async function (next) {
-//   try {
-//     //log old values
-//     const initialValues = this.getQuery()
-//     const updatedValues = this.getUpdate()
-
-//     const old = await this.model.findOne(initialValues).lean()
-//     const lastUpdated =
-//       updatedValues.updated_at[updatedValues.updated_at.length - 1]
-//     //lastUpdated.changes = Diff.diff(old, updatedValues)
-//     const changes = getFormattedChangedValues(updatedValues, old)
-//     console.log("changes", changes)
-
-//     // console.log("old", old)
-//     // console.log("updatedValues", updatedValues)
-
-//     next()
-//   } catch (err) {
-//     console.log(err)
-//     next(err)
-//   }
-// })
-
 bookingSchema.pre("findOneAndUpdate", async function (next) {
   try {
     const initialValues = this.getQuery()
@@ -529,7 +491,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
     delete old.__v
     delete old._id
     delete old.pickup_location._id
-    delete old.updated_at
+    //delete old.updated_at
 
     const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
       (obj, key) => {
