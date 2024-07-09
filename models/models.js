@@ -626,8 +626,8 @@ const pickupSchema = new Schema({
   meeting_point: String,
   time: String,
   details: String,
-  lat: String,
-  lon: String,
+  lat: Number,
+  lon: Number,
   guests: [taskGuestSchema],
 });
 
@@ -645,15 +645,15 @@ const scheduleTaskSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-)
+);
 
-scheduleTaskSchema.plugin(mongoosePaginate)
-scheduleTaskSchema.plugin(mongooseAggregatePaginate)
+scheduleTaskSchema.plugin(mongoosePaginate);
+scheduleTaskSchema.plugin(mongooseAggregatePaginate);
 
 const taskSchema = new Schema(
   {
     product: { type: String, required: true },
-    option_id: { type: String },
+    option_id: { type: String, required: true },
     date: { type: String, required: true },
     assignees: Array,
     vehicle_id: String,
