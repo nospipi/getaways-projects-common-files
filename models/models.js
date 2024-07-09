@@ -626,8 +626,8 @@ const pickupSchema = new Schema({
   meeting_point: String,
   time: String,
   details: String,
-  lat: Number,
-  lon: Number,
+  lat: Schema.Types.Mixed,
+  lon: Schema.Types.Mixed,
   guests: [taskGuestSchema],
 });
 
