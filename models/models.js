@@ -487,11 +487,10 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
     const old = await this.model.findOne(initialValues).lean(); // Using lean() to get plain JavaScript object
     delete old.__v;
     delete old._id;
-    delete old.pickup_location._id;
-
-    // if (old.pickup_location && old.pickup_location._id) {
-    //   delete old.pickup_location._id;
-    // }
+    //delete old.pickup_location._id;
+    if (old.pickup_location && old.pickup_location._id) {
+      delete old.pickup_location._id;
+    }
     delete old.updated_at;
 
     const updatedValues = this.getUpdate();
