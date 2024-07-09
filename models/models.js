@@ -462,7 +462,6 @@ const bookingSchema = new Schema(
     notes: { type: String, default: "" },
     notes_list: { type: Array, default: [] },
     group: { type: Number, default: 1 },
-    amended: { type: Boolean, default: false },
     cancelled: { type: Boolean, default: false },
     planned: { type: Boolean, default: false },
     billed: { type: Boolean, default: false },
@@ -476,7 +475,7 @@ const bookingSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-)
+);
 bookingSchema.plugin(mongoosastic)
 bookingSchema.plugin(mongoosePaginate)
 
