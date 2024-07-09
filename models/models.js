@@ -481,6 +481,7 @@ bookingSchema.plugin(mongoosastic)
 bookingSchema.plugin(mongoosePaginate)
 
 bookingSchema.pre("findOneAndUpdate", async function (next) {
+  console.log("PRE MIDDLEWARE IN BOOKING SCHEMA");
   try {
     const initialValues = this.getQuery();
     const old = await this.model.findOne(initialValues).lean(); // Using lean() to get plain JavaScript object
