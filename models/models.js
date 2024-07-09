@@ -626,8 +626,8 @@ const pickupSchema = new Schema({
   meeting_point: String,
   time: String,
   details: String,
-  lat: Schema.Types.Mixed,
-  lon: Schema.Types.Mixed,
+  lat: String,
+  lon: String,
   guests: [taskGuestSchema],
 });
 
@@ -653,7 +653,7 @@ scheduleTaskSchema.plugin(mongooseAggregatePaginate);
 const taskSchema = new Schema(
   {
     product: { type: String, required: true },
-    option_id: { type: String },
+    option_id: { type: String, required: true },
     date: { type: String, required: true },
     assignees: Array,
     vehicle_id: String,
