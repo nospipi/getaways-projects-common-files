@@ -653,7 +653,7 @@ scheduleTaskSchema.plugin(mongooseAggregatePaginate)
 const taskSchema = new Schema(
   {
     product: { type: String, required: true },
-    option_id: { type: String, required: true },
+    option_id: { type: String },
     date: { type: String, required: true },
     assignees: Array,
     vehicle_id: String,
@@ -666,7 +666,7 @@ const taskSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-)
+);
 
 taskSchema.plugin(mongoosePaginate)
 taskSchema.plugin(mongooseAggregatePaginate)
