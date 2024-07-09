@@ -626,10 +626,10 @@ const pickupSchema = new Schema({
   meeting_point: String,
   time: String,
   details: String,
-  lat: Number,
-  lon: Number,
+  lat: String,
+  lon: String,
   guests: [taskGuestSchema],
-})
+});
 
 const scheduleTaskSchema = new Schema(
   {
