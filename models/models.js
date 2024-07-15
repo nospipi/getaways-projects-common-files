@@ -511,7 +511,12 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
         before: diff.lhs,
         after: diff.rhs,
       }))
-      const filter = ["pickup_location.__v", "pickup_location._id", "__v"]
+      const filter = [
+        "pickup_location.__v",
+        "pickup_location._id",
+        "pickup_location",
+        "__v",
+      ]
       const filteredChanges = changes.filter(
         (change) => !filter.includes(change.path)
       )
