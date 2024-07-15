@@ -491,6 +491,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
       delete old.pickup_location._id
     }
     delete old.updated_at
+    delete old.email_history
 
     const updatedValues = this.getUpdate()
     const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
@@ -515,7 +516,6 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
         "pickup_location.__v",
         "pickup_location._id",
         "pickup_location",
-        "__v",
       ]
       const filteredChanges = changes.filter(
         (change) => !filter.includes(change.path)
