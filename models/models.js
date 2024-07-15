@@ -315,7 +315,7 @@ const meetingPointSchema = new Schema(
   {
     minimize: false,
   }
-);
+)
 
 const productsSchema = new Schema(
   {
@@ -475,55 +475,59 @@ const bookingSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 bookingSchema.plugin(mongoosastic)
 bookingSchema.plugin(mongoosePaginate)
 
 bookingSchema.pre("findOneAndUpdate", async function (next) {
-  console.log("PRE MIDDLEWARE IN BOOKING SCHEMA");
+  console.log("PRE MIDDLEWARE IN BOOKING SCHEMA")
   try {
-    const initialValues = this.getQuery();
-    const old = await this.model.findOne(initialValues).lean(); // Using lean() to get plain JavaScript object
-    delete old.__v;
-    delete old._id;
+    const initialValues = this.getQuery()
+    const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
+    delete old.__v
+    delete old._id
     //delete old.pickup_location._id;
     if (old.pickup_location && old.pickup_location._id) {
-      delete old.pickup_location._id;
+      delete old.pickup_location._id
     }
-    delete old.updated_at;
+    delete old.updated_at
 
-    const updatedValues = this.getUpdate();
+    const updatedValues = this.getUpdate()
     const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
       (obj, key) => {
         if (key !== "__v" && key !== "_id" && key !== "updated_at") {
-          obj[key] = updatedValues[key];
+          obj[key] = updatedValues[key]
         }
-        return obj;
+        return obj
       },
       {}
-    );
+    )
 
-    const differences = deepDiff(old, updatedValuesWithExclusions);
+    const differences = deepDiff(old, updatedValuesWithExclusions)
 
     if (differences) {
       const changes = differences.map((diff) => ({
         path: diff.path.join("."),
         before: diff.lhs,
         after: diff.rhs,
-      }));
+      }))
+      const filter = ["pickup_location.__v", "pickup_location._id", "__v"]
+      const filteredChanges = changes.filter(
+        (change) => !filter.includes(change.path)
+      )
 
       if (Array.isArray(updatedValues.updated_at)) {
-        const lastUpdated = updatedValues.updated_at.slice(-1)[0];
-        lastUpdated.changes = changes;
+        const lastUpdated = updatedValues.updated_at.slice(-1)[0]
+        lastUpdated.changes = filteredChanges
       }
     }
 
-    next();
+    next()
   } catch (err) {
-    console.log("ERROR FROM PRE MIDDLEWARE IN BOOKING SCHEMA", err);
-    next(err);
+    console.log("ERROR FROM PRE MIDDLEWARE IN BOOKING SCHEMA", err)
+    next(err)
   }
-});
+})
 
 const tourGroupSchema = new Schema({
   product_id: String,
@@ -629,7 +633,7 @@ const pickupSchema = new Schema({
   lat: String,
   lon: String,
   guests: [taskGuestSchema],
-});
+})
 
 const scheduleTaskSchema = new Schema(
   {
@@ -645,10 +649,10 @@ const scheduleTaskSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 
-scheduleTaskSchema.plugin(mongoosePaginate);
-scheduleTaskSchema.plugin(mongooseAggregatePaginate);
+scheduleTaskSchema.plugin(mongoosePaginate)
+scheduleTaskSchema.plugin(mongooseAggregatePaginate)
 
 const taskSchema = new Schema(
   {
@@ -666,7 +670,7 @@ const taskSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 
 taskSchema.plugin(mongoosePaginate)
 taskSchema.plugin(mongooseAggregatePaginate)
