@@ -708,8 +708,8 @@ const calendarNoteSchema = new Schema({
   date: String,
   author_id: { type: String, required: true },
 })
-noteSchema.plugin(mongoosePaginate)
-noteSchema.plugin(mongooseAggregatePaginate)
+calendarNoteSchema.plugin(mongoosePaginate)
+calendarNoteSchema.plugin(mongooseAggregatePaginate)
 
 const appVersionSchema = new Schema({
   version: { type: String, required: true },
