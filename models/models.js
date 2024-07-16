@@ -704,10 +704,7 @@ noteSchema.plugin(mongooseAggregatePaginate)
 
 const calendarNoteSchema = new Schema({
   body: { type: String, required: true },
-  createdAt: {
-    type: String,
-    default: () => moment().format("YYYY-MM-DD"),
-  },
+  createdAt: { type: Date, default: Date.now },
   date: String,
   author_id: { type: String, required: true },
 })
