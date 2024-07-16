@@ -702,6 +702,18 @@ const noteSchema = new Schema({
 noteSchema.plugin(mongoosePaginate)
 noteSchema.plugin(mongooseAggregatePaginate)
 
+const calendarNoteSchema = new Schema({
+  body: { type: String, required: true },
+  createdAt: {
+    type: String,
+    default: () => moment().format("YYYY-MM-DD"),
+  },
+  date: String,
+  author_id: { type: String, required: true },
+})
+noteSchema.plugin(mongoosePaginate)
+noteSchema.plugin(mongooseAggregatePaginate)
+
 const appVersionSchema = new Schema({
   version: { type: String, required: true },
   date: { type: Date, default: Date.now },
@@ -820,6 +832,7 @@ module.exports = {
   PickupModel: model("pickup", pickupSchema),
   TodoModel: model("todo", todoSchema),
   NoteModel: model("note", noteSchema),
+  CalendarNoteModel: model("calendar_note", calendarNoteSchema),
   NotificationModel: model("notification", notificationSchema),
   PwaPushSubscriptionModel: model(
     "pwa_push_subscription",
