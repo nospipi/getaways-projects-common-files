@@ -707,6 +707,7 @@ const calendarNoteSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   date: String,
   author_id: { type: String, required: true },
+  public: { type: Boolean, default: false },
 })
 calendarNoteSchema.plugin(mongoosePaginate)
 calendarNoteSchema.plugin(mongooseAggregatePaginate)
