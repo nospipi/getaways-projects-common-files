@@ -384,6 +384,7 @@ const productsSchema = new Schema(
       type: [
         {
           time_slot: String,
+          isDefaultPickupTime: Boolean,
           label: String,
           bokun_start_time_id: String,
           date_ranges: {
@@ -418,7 +419,7 @@ const productsSchema = new Schema(
   {
     minimize: false,
   }
-)
+);
 
 productsSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
