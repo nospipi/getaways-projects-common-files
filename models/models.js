@@ -181,12 +181,13 @@ const userSchema = new Schema(
     onOfficeDuty: Boolean,
     isEmergencyContact: Boolean,
     permissions: Object,
+    shouldReceiveAnnouncements: Boolean,
   },
   {
     minimize: false,
     //allows to save empty objects in db
   }
-)
+);
 userSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
 }) //https://www.npmjs.com/package/mongoose-unique-validator
