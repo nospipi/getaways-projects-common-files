@@ -187,7 +187,7 @@ const userSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 userSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
 }) //https://www.npmjs.com/package/mongoose-unique-validator
@@ -420,7 +420,7 @@ const productsSchema = new Schema(
   {
     minimize: false,
   }
-);
+)
 
 productsSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
@@ -436,6 +436,7 @@ productsSchema.pre("save", function (next) {
 
 const channelsSchema = new Schema({
   title: { type: String, required: true },
+  commission_rate: { type: Number, required: true },
 })
 
 const bookingSchema = new Schema(
