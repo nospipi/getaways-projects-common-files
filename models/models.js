@@ -805,6 +805,36 @@ const availabilityToolVisitorSchema = new Schema({
   timestamp: String,
 })
 
+//------------------------- TEST FOR BALANCE FEATURE ----------------------------
+
+const walletSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    user: { type: String, required: true },
+    balance: { type: Number, required: true },
+  },
+  { timestamps: true }
+)
+
+const categorySchema = new Schema(
+  {
+    title: { type: String, required: true },
+  },
+  { timestamps: true }
+)
+
+const transactionSchema = new Schema(
+  {
+    wallet: { type: Schema.Types.ObjectId, ref: "wallet", required: true },
+    category: { type: Schema.Types.ObjectId, ref: "category", required: true },
+    user: { type: String, required: true },
+    amount: { type: Number, required: true },
+    date: { type: Date, required: true },
+    description: { type: String, required: true },
+  },
+  { timestamps: true }
+)
+
 //--------------------------------------------------------------
 
 module.exports = {
@@ -858,4 +888,7 @@ module.exports = {
     "availability_tool_visitor",
     availabilityToolVisitorSchema
   ),
+  WalletModel: model("wallet", walletSchema),
+  CategoryModel: model("category", categorySchema),
+  TransactionModel: model("transaction", transactionSchema),
 }
