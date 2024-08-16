@@ -836,6 +836,25 @@ const transactionSchema = new Schema(
   { timestamps: true }
 )
 
+transactionSchema.pre("save", async function (next) {
+  try {
+    const wallet = await mongoose.model("wallet").findById(this.wallet)
+    if (!wallet) {
+      throw new Error("Wallet not found")
+    }
+
+    // Accumulate the wallet's balance
+    wallet.balance += this.amount
+
+    // Save the updated wallet
+    await wallet.save()
+
+    next()
+  } catch (error) {
+    next(error)
+  }
+})
+
 //--------------------------------------------------------------
 
 module.exports = {
