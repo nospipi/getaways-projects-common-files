@@ -830,7 +830,7 @@ const transactionSchema = new Schema(
     category: { type: Schema.Types.ObjectId, ref: "category", required: true },
     user: { type: String, required: true },
     amount: { type: Number, required: true },
-    date: { type: Date, required: true },
+    date: { type: moment().format("YYYY-MM-DD"), required: true },
     description: { type: String, required: true },
   },
   { timestamps: true }
