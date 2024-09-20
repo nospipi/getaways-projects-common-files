@@ -539,6 +539,7 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
 
 const tourGroupSchema = new Schema({
   product_id: { type: String, required: true },
+  product: { type: String, required: true },
   option_id: { type: String, required: true },
   start_time_id: { type: String, required: true },
   date: { type: String, required: true },
@@ -560,7 +561,7 @@ const tourGroupSchema = new Schema({
     default: 1,
   },
   vehicle_platform_entry: String,
-})
+});
 
 //TODO temporary //unset product when is fixed in all apps
 tourGroupSchema.pre("save", function (next) {
