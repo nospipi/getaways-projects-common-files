@@ -543,9 +543,7 @@ const tourGroupSchema = new Schema({
   start_time_id: { type: String, required: true },
   date: { type: String, required: true },
   time: { type: String, required: true },
-  product: String,
   bookings: [{ type: Schema.Types.ObjectId, ref: "booking" }], //need to be populated
-  task: String,
   task_id: String,
   notes: String,
   notes_list: { type: Array, default: [] }, // -
