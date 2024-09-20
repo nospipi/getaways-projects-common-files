@@ -538,12 +538,12 @@ bookingSchema.pre("findOneAndUpdate", async function (next) {
 })
 
 const tourGroupSchema = new Schema({
-  product_id: { type: String, required: true },
-  product: { type: String, required: true },
-  option_id: { type: String, required: true },
-  start_time_id: { type: String, required: true },
-  date: { type: String, required: true },
-  time: { type: String, required: true },
+  product_id: String,
+  product: String,
+  option_id: String,
+  start_time_id: String,
+  date: String,
+  time: String,
   bookings: [{ type: Schema.Types.ObjectId, ref: "booking" }], //need to be populated
   task_id: String,
   notes: String,
