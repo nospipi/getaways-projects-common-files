@@ -388,14 +388,6 @@ const productsSchema = new Schema(
           isDefaultPickupTime: Boolean,
           label: String,
           bokun_start_time_id: String,
-          date_ranges: {
-            type: [
-              {
-                start: String,
-                end: String,
-              },
-            ],
-          },
         },
       ],
     },
@@ -561,7 +553,7 @@ const tourGroupSchema = new Schema({
     default: 1,
   },
   vehicle_platform_entry: String,
-});
+})
 
 //TODO temporary //unset product when is fixed in all apps
 tourGroupSchema.pre("save", function (next) {
