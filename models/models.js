@@ -330,8 +330,8 @@ const productsSchema = new Schema(
     options: {
       type: [
         {
-          title: String,
-          bokun_code: String,
+          title: { type: String, required: true },
+          bokun_code: { type: String, required: true },
           is_private: { type: Boolean, required: true },
           is_guided: { type: Boolean, required: true },
           pickup_included: { type: Boolean, required: true },
