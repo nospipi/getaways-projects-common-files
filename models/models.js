@@ -336,7 +336,7 @@ const productsSchema = new Schema(
           is_guided: { type: Boolean, required: true },
           pickup_included: { type: Boolean, required: true },
           requires_vehicle: { type: Boolean, required: true },
-          requires_platformEntry: { type: Boolean, required: true },
+          requires_platform_entry: { type: Boolean, required: true },
           meeting_point_id: { type: String },
         },
       ],
