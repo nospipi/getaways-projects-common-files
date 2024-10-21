@@ -33,16 +33,11 @@ const getAllChangedValues = (changes, path = "") => {
 
 //-------------------------------------------------------------------------------
 
-const fileSchema = new Schema(
-  {
-    name: String, // The original file name
-    data: String, // Base64-encoded binary data
-    contentType: String, // MIME type (e.g., image/jpeg, application/pdf)
-  },
-  {
-    timestamps: true,
-  }
-);
+const fileSchema = new Schema({
+  name: String, // The original file name
+  data: String, // Base64-encoded binary data
+  contentType: String, // MIME type (e.g., image/jpeg, application/pdf)
+});
 
 const activitySchema = new Schema({
   type: {
