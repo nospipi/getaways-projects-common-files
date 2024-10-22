@@ -290,10 +290,9 @@ const meetingPointSchema = new Schema(
 
 const productsSchema = new Schema(
   {
-    index: { type: Number, required: true, default: 0 },
+    index: { type: Number, default: 0 },
     title: {
       type: String,
-      required: true,
       unique: true,
       uniqueCaseInsensitive: true,
       default: "",
@@ -301,24 +300,19 @@ const productsSchema = new Schema(
     options: {
       type: [
         {
-          title: { type: String, required: true, default: "" },
-          bokun_code: { type: String, required: true, default: "" },
-          is_private: { type: Boolean, required: true, default: false },
-          is_guided: { type: Boolean, required: true, default: false },
-          pickup_included: { type: Boolean, required: true, default: false },
-          requires_vehicle: { type: Boolean, required: true, default: false },
-          requires_platform_entry: {
-            type: Boolean,
-            required: true,
-            default: false,
-          },
+          title: { type: String, default: "" },
+          bokun_code: { type: String, default: "" },
+          is_private: { type: Boolean, default: false },
+          is_guided: { type: Boolean, default: false },
+          pickup_included: { type: Boolean, default: false },
+          requires_vehicle: { type: Boolean, default: false },
+          requires_platform_entry: { type: Boolean, default: false },
           meeting_point_id: { type: String, default: "" },
         },
       ],
       default: [],
     },
     platform_product_name: {
-      required: true,
       type: String,
       unique: true,
       uniqueCaseInsensitive: true,
@@ -361,7 +355,7 @@ const productsSchema = new Schema(
     product_full_description: { type: String, default: "" },
     inclusions: { type: [String], default: [] },
     exclusions: { type: [String], default: [] },
-    time_slots: { type: [String], required: true, default: [] },
+    time_slots: { type: [String], default: [] },
     time_slots_with_range: {
       type: [
         {
@@ -373,22 +367,22 @@ const productsSchema = new Schema(
       ],
       default: [],
     },
-    pricing_options: { type: [String], required: true, default: [] },
-    destinations: { type: [String], required: true, default: [] },
-    tour_types: { type: [String], required: true, default: [] },
-    tour_duration: { type: String, required: true, default: "" },
+    pricing_options: { type: [String], default: [] },
+    destinations: { type: [String], default: [] },
+    tour_types: { type: [String], default: [] },
+    tour_duration: { type: String, default: "" },
     tour_duration_type: { type: String, default: "" },
-    tour_categories: { type: [String], required: true, default: [] },
+    tour_categories: { type: [String], default: [] },
     compatible_billing_codes: { type: [String], default: [] },
     crewGroups: { type: [String], default: [] },
     crewRoles: { type: [String], default: [] },
-    isPrivate: { type: Boolean, required: true, default: false },
-    isGuided: { type: Boolean, required: true, default: false },
-    pickupIncluded: { type: Boolean, required: true, default: false },
+    isPrivate: { type: Boolean, default: false },
+    isGuided: { type: Boolean, default: false },
+    pickupIncluded: { type: Boolean, default: false },
     review_link: { type: String, default: "" },
     affiliate_link: { type: String, default: "" },
-    isPublished: { type: Boolean, required: true, default: false },
-    market_price: { type: Number, required: true, default: 0 },
+    isPublished: { type: Boolean, default: false },
+    market_price: { type: Number, default: 0 },
   },
   {
     minimize: false,
