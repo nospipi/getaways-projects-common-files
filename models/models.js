@@ -288,111 +288,112 @@ const meetingPointSchema = new Schema(
   }
 )
 
-const productsSchema = new Schema(
-  {
-    index: { type: Number, default: 0 },
-    title: {
-      type: String,
-      unique: true,
-      uniqueCaseInsensitive: true,
-      default: "",
-    },
-    options: {
-      type: [
-        {
-          title: { type: String },
-          bokun_code: { type: String },
-          is_private: { type: Boolean },
-          is_guided: { type: Boolean },
-          pickup_included: { type: Boolean },
-          requires_vehicle: { type: Boolean },
-          requires_platform_entry: { type: Boolean },
-          meeting_point_id: { type: String },
-        },
-      ],
-      default: [],
-    },
-    platform_product_name: {
-      type: String,
-      unique: true,
-      uniqueCaseInsensitive: true,
-      default: "",
-    },
-    bokun_product_code: {
-      type: String,
-      default: "",
-      unique: true,
-      uniqueCaseInsensitive: true,
-    },
-    location: {
-      type: {
-        address: { type: String },
-        latitude: { type: Number },
-        longitude: { type: Number },
-      },
-      default: {
-        address: "",
-        latitude: 37.9856983598462,
-        longitude: 23.719086989263594,
-      },
-    },
-    meeting_point_id: { type: String, default: "" },
-    slug: { type: String, default: "" },
-    product_images: { type: [String], default: [] },
-    product_pictures: {
-      type: [
-        {
-          id: { type: String },
-          url: { type: String },
-          caption: { type: String },
-          alt: { type: String },
-          description: { type: String },
-        },
-      ],
-      default: [],
-    },
-    guide_assignment_identifier: { type: String, default: "" },
-    activity_level: { type: String, default: "" },
-    additional_info: { type: [String], default: [] },
-    special_instructions: { type: [String], default: [] },
-    highlights: { type: [String], default: [] },
-    product_short_description: { type: String, default: "" },
-    product_full_description: { type: String, default: "" },
-    inclusions: { type: [String], default: [] },
-    exclusions: { type: [String], default: [] },
-    time_slots: { type: [String], default: [] },
-    time_slots_with_range: {
-      type: [
-        {
-          time_slot: { type: String },
-          isDefaultPickupTime: { type: Boolean },
-          label: { type: String },
-          bokun_start_time_id: { type: String },
-        },
-      ],
-      default: [],
-    },
-    pricing_options: { type: [String], default: [] },
-    destinations: { type: [String], default: [] },
-    tour_types: { type: [String], default: [] },
-    tour_duration: { type: String, default: "" },
-    tour_duration_type: { type: String, default: "" },
-    tour_categories: { type: [String], default: [] },
-    compatible_billing_codes: { type: [String], default: [] },
-    crewGroups: { type: [String], default: [] },
-    crewRoles: { type: [String], default: [] },
-    isPrivate: { type: Boolean, default: false },
-    isGuided: { type: Boolean, default: false },
-    pickupIncluded: { type: Boolean, default: false },
-    review_link: { type: String, default: "" },
-    affiliate_link: { type: String, default: "" },
-    isPublished: { type: Boolean, default: false },
-    market_price: { type: Number, default: 0 },
-  },
-  {
-    minimize: false,
-  }
-)
+// const productsSchema = new Schema(
+//   {
+//     index: { type: Number, default: 0 },
+//     title: {
+//       type: String,
+//       unique: true,
+//       uniqueCaseInsensitive: true,
+//       default: "",
+//     },
+//     options: {
+//       type: [
+//         {
+//           title: { type: String },
+//           bokun_code: { type: String },
+//           is_private: { type: Boolean },
+//           is_guided: { type: Boolean },
+//           pickup_included: { type: Boolean },
+//           requires_vehicle: { type: Boolean },
+//           requires_platform_entry: { type: Boolean },
+//           meeting_point_id: { type: String },
+//         },
+//       ],
+//       default: [],
+//     },
+//     platform_product_name: {
+//       type: String,
+//       unique: true,
+//       uniqueCaseInsensitive: true,
+//       default: "",
+//     },
+//     bokun_product_code: {
+//       type: String,
+//       default: "",
+//       unique: true,
+//       uniqueCaseInsensitive: true,
+//     },
+//     location: {
+//       type: {
+//         address: { type: String },
+//         latitude: { type: Number },
+//         longitude: { type: Number },
+//       },
+//       default: {
+//         address: "",
+//         latitude: 37.9856983598462,
+//         longitude: 23.719086989263594,
+//       },
+//     },
+//     meeting_point_id: { type: String, default: "" },
+//     slug: { type: String, default: "" },
+//     product_images: { type: [String], default: [] },
+//     product_pictures: {
+//       type: [
+//         {
+//           id: { type: String },
+//           url: { type: String },
+//           caption: { type: String },
+//           alt: { type: String },
+//           description: { type: String },
+//         },
+//       ],
+//       default: [],
+//     },
+//     guide_assignment_identifier: { type: String, default: "" },
+//     activity_level: { type: String, default: "" },
+//     additional_info: { type: [String], default: [] },
+//     special_instructions: { type: [String], default: [] },
+//     highlights: { type: [String], default: [] },
+//     product_short_description: { type: String, default: "" },
+//     product_full_description: { type: String, default: "" },
+//     inclusions: { type: [String], default: [] },
+//     exclusions: { type: [String], default: [] },
+//     time_slots: { type: [String], default: [] },
+//     time_slots_with_range: {
+//       type: [
+//         {
+//           time_slot: { type: String },
+//           isDefaultPickupTime: { type: Boolean },
+//           label: { type: String },
+//           bokun_start_time_id: { type: String },
+//         },
+//       ],
+//       default: [],
+//     },
+//     pricing_options: { type: [String], default: [] },
+//     destinations: { type: [String], default: [] },
+//     tour_types: { type: [String], default: [] },
+//     tour_duration: { type: String, default: "" },
+//     tour_duration_type: { type: String, default: "" },
+//     tour_categories: { type: [String], default: [] },
+//     compatible_billing_codes: { type: [String], default: [] },
+//     crewGroups: { type: [String], default: [] },
+//     crewRoles: { type: [String], default: [] },
+//     isPrivate: { type: Boolean, default: false },
+//     isGuided: { type: Boolean, default: false },
+//     pickupIncluded: { type: Boolean, default: false },
+//     review_link: { type: String, default: "" },
+//     affiliate_link: { type: String, default: "" },
+//     isPublished: { type: Boolean, default: false },
+//     market_price: { type: Number, default: 0 },
+//     isCompleted: { type: Boolean, default: false },
+//   },
+//   {
+//     minimize: false,
+//   }
+// )
 
 // const productsSchema = new Schema(
 //   {
@@ -492,12 +493,126 @@ const productsSchema = new Schema(
 //   }
 // );
 
+const productsSchema = new Schema(
+  {
+    index: { type: Number, default: null },
+    title: {
+      type: String,
+      unique: true,
+      uniqueCaseInsensitive: true,
+      default: null,
+    },
+    options: {
+      type: [
+        {
+          title: { type: String },
+          bokun_code: { type: String },
+          is_private: { type: Boolean },
+          is_guided: { type: Boolean },
+          pickup_included: { type: Boolean },
+          requires_vehicle: { type: Boolean },
+          requires_platform_entry: { type: Boolean },
+          meeting_point_id: { type: String },
+        },
+      ],
+      default: null,
+    },
+    platform_product_name: {
+      type: String,
+      unique: true,
+      uniqueCaseInsensitive: true,
+      default: null,
+    },
+    bokun_product_code: {
+      type: String,
+      default: null,
+      unique: true,
+      uniqueCaseInsensitive: true,
+    },
+    location: {
+      type: {
+        address: { type: String },
+        latitude: { type: Number },
+        longitude: { type: Number },
+      },
+      default: {
+        address: null,
+        latitude: null,
+        longitude: null,
+      },
+    },
+    meeting_point_id: { type: String, default: null },
+    slug: { type: String, default: null },
+    product_images: { type: [String], default: null },
+    product_pictures: {
+      type: [
+        {
+          id: { type: String },
+          url: { type: String },
+          caption: { type: String },
+          alt: { type: String },
+          description: { type: String },
+        },
+      ],
+      default: null,
+    },
+    guide_assignment_identifier: { type: String, default: null },
+    activity_level: { type: String, default: null },
+    additional_info: { type: [String], default: null },
+    special_instructions: { type: [String], default: null },
+    highlights: { type: [String], default: null },
+    product_short_description: { type: String, default: null },
+    product_full_description: { type: String, default: null },
+    inclusions: { type: [String], default: null },
+    exclusions: { type: [String], default: null },
+    time_slots: { type: [String], default: null },
+    time_slots_with_range: {
+      type: [
+        {
+          time_slot: { type: String },
+          isDefaultPickupTime: { type: Boolean },
+          label: { type: String },
+          bokun_start_time_id: { type: String },
+        },
+      ],
+      default: null,
+    },
+    pricing_options: { type: [String], default: null },
+    destinations: { type: [String], default: null },
+    tour_types: { type: [String], default: null },
+    tour_duration: { type: String, default: null },
+    tour_duration_type: { type: String, default: null },
+    tour_categories: { type: [String], default: null },
+    compatible_billing_codes: { type: [String], default: null },
+    crewGroups: { type: [String], default: null },
+    crewRoles: { type: [String], default: null },
+    isPrivate: { type: Boolean, default: null },
+    isGuided: { type: Boolean, default: null },
+    pickupIncluded: { type: Boolean, default: null },
+    review_link: { type: String, default: null },
+    affiliate_link: { type: String, default: null },
+    isPublished: { type: Boolean, default: null },
+    market_price: { type: Number, default: null },
+    isCompleted: { type: Boolean, default: null },
+  },
+  {
+    minimize: false,
+  }
+)
+
 productsSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
 }) //https://www.npmjs.com/package/mongoose-unique-validator
 
 // Pre-save middleware to set the slug based on platform_product_name
 productsSchema.pre("save", function (next) {
+  if (this.platform_product_name) {
+    this.slug = _.kebabCase(this.platform_product_name)
+  }
+  next()
+})
+
+productsSchema.pre("findByIdAndUpdate", function (next) {
   if (this.platform_product_name) {
     this.slug = _.kebabCase(this.platform_product_name)
   }
