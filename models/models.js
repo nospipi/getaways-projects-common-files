@@ -300,14 +300,14 @@ const productsSchema = new Schema(
     options: {
       type: [
         {
-          title: { type: String, default: "" },
-          bokun_code: { type: String, default: "" },
-          is_private: { type: Boolean, default: false },
-          is_guided: { type: Boolean, default: false },
-          pickup_included: { type: Boolean, default: false },
-          requires_vehicle: { type: Boolean, default: false },
-          requires_platform_entry: { type: Boolean, default: false },
-          meeting_point_id: { type: String, default: "" },
+          title: { type: String },
+          bokun_code: { type: String },
+          is_private: { type: Boolean },
+          is_guided: { type: Boolean },
+          pickup_included: { type: Boolean },
+          requires_vehicle: { type: Boolean },
+          requires_platform_entry: { type: Boolean },
+          meeting_point_id: { type: String },
         },
       ],
       default: [],
@@ -326,11 +326,15 @@ const productsSchema = new Schema(
     },
     location: {
       type: {
-        address: { type: String, default: "" },
-        latitude: { type: Number, default: 0 },
-        longitude: { type: Number, default: 0 },
+        address: { type: String },
+        latitude: { type: Number },
+        longitude: { type: Number },
       },
-      default: {},
+      default: {
+        address: "",
+        latitude: 37.9856983598462,
+        longitude: 23.719086989263594,
+      },
     },
     meeting_point_id: { type: String, default: "" },
     slug: { type: String, default: "" },
@@ -338,10 +342,10 @@ const productsSchema = new Schema(
     product_pictures: {
       type: [
         {
-          url: { type: String, default: "" },
-          caption: { type: String, default: "" },
-          alt: { type: String, default: "" },
-          description: { type: String, default: "" },
+          url: { type: String },
+          caption: { type: String },
+          alt: { type: String },
+          description: { type: String },
         },
       ],
       default: [],
@@ -359,10 +363,10 @@ const productsSchema = new Schema(
     time_slots_with_range: {
       type: [
         {
-          time_slot: { type: String, default: "" },
-          isDefaultPickupTime: { type: Boolean, default: false },
-          label: { type: String, default: "" },
-          bokun_start_time_id: { type: String, default: "" },
+          time_slot: { type: String },
+          isDefaultPickupTime: { type: Boolean },
+          label: { type: String },
+          bokun_start_time_id: { type: String },
         },
       ],
       default: [],
