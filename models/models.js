@@ -593,6 +593,7 @@ const productsSchema = new Schema(
     affiliate_link: { type: String, default: null },
     isPublished: { type: Boolean, default: null },
     market_price: { type: Number, default: null },
+    isAvailableInPlan: { type: Boolean, default: null },
     isCompleted: { type: Boolean, default: null },
   },
   {
