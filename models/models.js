@@ -600,9 +600,9 @@ const productsSchema = new Schema(
   }
 )
 
-productsSchema.plugin(uniqueValidator, {
-  message: "{PATH} {VALUE} already exists.",
-}) //https://www.npmjs.com/package/mongoose-unique-validator
+// productsSchema.plugin(uniqueValidator, {
+//   message: "{PATH} {VALUE} already exists.",
+// }) //https://www.npmjs.com/package/mongoose-unique-validator
 
 // Pre-save middleware to set the slug based on platform_product_name
 productsSchema.pre("save", function (next) {
