@@ -342,6 +342,7 @@ const productsSchema = new Schema(
     product_pictures: {
       type: [
         {
+          id: { type: String },
           url: { type: String },
           caption: { type: String },
           alt: { type: String },
