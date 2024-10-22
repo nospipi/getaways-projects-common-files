@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
-const { Schema, model } = mongoose;
-const _ = require("lodash");
-const mongoosePaginate = require("mongoose-paginate-v2");
-const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2");
-const mongoosastic = require("mongoosastic");
-const moment = require("moment");
-const deepDiff = require("deep-diff").diff;
+const mongoose = require("mongoose")
+const uniqueValidator = require("mongoose-unique-validator")
+const { Schema, model } = mongoose
+const _ = require("lodash")
+const mongoosePaginate = require("mongoose-paginate-v2")
+const mongooseAggregatePaginate = require("mongoose-aggregate-paginate-v2")
+const mongoosastic = require("mongoosastic")
+const moment = require("moment")
+const deepDiff = require("deep-diff").diff
 // npm install https://<GITHUB_ACCESS_TOKEN>@github.com/nospipi/getaways-projects-common-files.git
 // require("getaways-projects-common-files/models/models.js");
 // npm install https://github.com/nospipi/getaways-projects-common-files
@@ -16,20 +16,20 @@ const getAllChangedValues = (changes, path = "") => {
   return changes.reduce((acc, change) => {
     const fullPath = path
       ? `${path}.${change.path.join(".")}`
-      : change.path.join(".");
+      : change.path.join(".")
     if (change.kind === "E") {
       acc.push({
         path: fullPath,
         before: change.lhs,
         after: change.rhs,
-      });
+      })
     } else if (change.kind === "A") {
-      const nestedChanges = getAllChangedValues(change.item, fullPath);
-      acc = acc.concat(nestedChanges);
+      const nestedChanges = getAllChangedValues(change.item, fullPath)
+      acc = acc.concat(nestedChanges)
     }
-    return acc;
-  }, []);
-};
+    return acc
+  }, [])
+}
 
 //-------------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ const fileSchema = new Schema({
   name: String, // The original file name
   data: String, // Base64-encoded binary data
   contentType: String, // MIME type (e.g., image/jpeg, application/pdf)
-});
+})
 
 const activitySchema = new Schema({
   type: {
@@ -60,10 +60,10 @@ const activitySchema = new Schema({
     type: Array,
     required: true,
   },
-});
+})
 activitySchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-});
+})
 
 const groupSchema = new Schema({
   title: {
@@ -72,11 +72,11 @@ const groupSchema = new Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-});
+})
 
 groupSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-});
+})
 
 const roleSchema = new Schema({
   title: {
@@ -85,11 +85,11 @@ const roleSchema = new Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-});
+})
 
 roleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-});
+})
 
 const userSchema = new Schema(
   {
@@ -157,15 +157,15 @@ const userSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 userSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-}); //https://www.npmjs.com/package/mongoose-unique-validator
+}) //https://www.npmjs.com/package/mongoose-unique-validator
 
 const frequentMeetingPointSchema = new Schema({
   name: String,
   frequency: Number,
-});
+})
 
 const balanceSchema = new Schema({
   user: {
@@ -177,7 +177,7 @@ const balanceSchema = new Schema({
   amount: { type: Number, required: true },
   type: { type: String, required: true },
   receiptUrl: { type: String },
-});
+})
 
 const vehicleSchema = new Schema({
   plate: {
@@ -218,10 +218,10 @@ const vehicleSchema = new Schema({
     type: Boolean,
     required: true,
   },
-});
+})
 vehicleSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-});
+})
 
 const announcementSchema = new Schema({
   title: { type: String, required: true },
@@ -234,9 +234,9 @@ const announcementSchema = new Schema({
   critical: { type: Boolean, required: true },
   pinned: { type: Boolean, default: false },
   author: { type: String, required: true },
-});
+})
 
-announcementSchema.plugin(mongoosePaginate);
+announcementSchema.plugin(mongoosePaginate)
 
 const bugReportSchema = new Schema({
   body: {
@@ -245,7 +245,7 @@ const bugReportSchema = new Schema({
   },
   user: String,
   date: { type: Date, default: Date.now },
-});
+})
 
 const requestSchema = new Schema({
   requestedBy: { type: Object, required: true },
@@ -271,7 +271,7 @@ const requestSchema = new Schema({
   closed: { type: Boolean, default: false },
   granted: { type: Boolean, default: false },
   created_at: { type: Date, default: Date.now },
-});
+})
 
 const meetingPointSchema = new Schema(
   {
@@ -286,36 +286,43 @@ const meetingPointSchema = new Schema(
   {
     minimize: false,
   }
-);
+)
 
 const productsSchema = new Schema(
   {
-    index: { type: Number, required: true },
+    index: { type: Number, required: true, default: 0 },
     title: {
       type: String,
       required: true,
       unique: true,
       uniqueCaseInsensitive: true,
+      default: "",
     },
     options: {
       type: [
         {
-          title: { type: String, required: true },
-          bokun_code: { type: String, required: true },
-          is_private: { type: Boolean, required: true },
-          is_guided: { type: Boolean, required: true },
-          pickup_included: { type: Boolean, required: true },
-          requires_vehicle: { type: Boolean, required: true },
-          requires_platform_entry: { type: Boolean, required: true },
-          meeting_point_id: { type: String },
+          title: { type: String, required: true, default: "" },
+          bokun_code: { type: String, required: true, default: "" },
+          is_private: { type: Boolean, required: true, default: false },
+          is_guided: { type: Boolean, required: true, default: false },
+          pickup_included: { type: Boolean, required: true, default: false },
+          requires_vehicle: { type: Boolean, required: true, default: false },
+          requires_platform_entry: {
+            type: Boolean,
+            required: true,
+            default: false,
+          },
+          meeting_point_id: { type: String, default: "" },
         },
       ],
+      default: [],
     },
     platform_product_name: {
       required: true,
       type: String,
       unique: true,
       uniqueCaseInsensitive: true,
+      default: "",
     },
     bokun_product_code: {
       type: String,
@@ -325,83 +332,183 @@ const productsSchema = new Schema(
     },
     location: {
       type: {
-        address: String,
-        latitude: Number,
-        longitude: Number,
+        address: { type: String, default: "" },
+        latitude: { type: Number, default: 0 },
+        longitude: { type: Number, default: 0 },
       },
+      default: {},
     },
-    meeting_point_id: { type: String },
-    slug: { type: String },
-    product_images: { type: [String] },
+    meeting_point_id: { type: String, default: "" },
+    slug: { type: String, default: "" },
+    product_images: { type: [String], default: [] },
     product_pictures: {
       type: [
         {
-          url: String,
-          caption: String,
-          alt: String,
-          description: String,
+          url: { type: String, default: "" },
+          caption: { type: String, default: "" },
+          alt: { type: String, default: "" },
+          description: { type: String, default: "" },
         },
       ],
+      default: [],
     },
-    guide_assignment_identifier: { type: String },
-    activity_level: { type: String },
-    additional_info: { type: [String] },
-    special_instructions: { type: [String] },
-    highlights: { type: [String] },
-    product_short_description: { type: String },
-    product_full_description: { type: String },
-    inclusions: { type: [String] },
-    exclusions: { type: [String] },
-    time_slots: { type: [String], required: true },
+    guide_assignment_identifier: { type: String, default: "" },
+    activity_level: { type: String, default: "" },
+    additional_info: { type: [String], default: [] },
+    special_instructions: { type: [String], default: [] },
+    highlights: { type: [String], default: [] },
+    product_short_description: { type: String, default: "" },
+    product_full_description: { type: String, default: "" },
+    inclusions: { type: [String], default: [] },
+    exclusions: { type: [String], default: [] },
+    time_slots: { type: [String], required: true, default: [] },
     time_slots_with_range: {
       type: [
         {
-          time_slot: String,
-          isDefaultPickupTime: Boolean,
-          label: String,
-          bokun_start_time_id: String,
+          time_slot: { type: String, default: "" },
+          isDefaultPickupTime: { type: Boolean, default: false },
+          label: { type: String, default: "" },
+          bokun_start_time_id: { type: String, default: "" },
         },
       ],
+      default: [],
     },
-    pricing_options: { type: [String], required: true },
-    destinations: { type: [String], required: true },
-    tour_types: { type: [String], required: true },
-    tour_duration: { type: String, required: true },
-    tour_duration_type: { type: String },
-    tour_categories: { type: [String], required: true },
-    compatible_billing_codes: { type: Array },
+    pricing_options: { type: [String], required: true, default: [] },
+    destinations: { type: [String], required: true, default: [] },
+    tour_types: { type: [String], required: true, default: [] },
+    tour_duration: { type: String, required: true, default: "" },
+    tour_duration_type: { type: String, default: "" },
+    tour_categories: { type: [String], required: true, default: [] },
+    compatible_billing_codes: { type: [String], default: [] },
     crewGroups: { type: [String], default: [] },
     crewRoles: { type: [String], default: [] },
-    isPrivate: { type: Boolean, required: true },
-
-    isGuided: { type: Boolean, required: true },
-    pickupIncluded: { type: Boolean, required: true },
-    review_link: { type: String },
-    affiliate_link: { type: String },
-    isPublished: { type: Boolean, required: true },
-    market_price: { type: Number, required: true },
+    isPrivate: { type: Boolean, required: true, default: false },
+    isGuided: { type: Boolean, required: true, default: false },
+    pickupIncluded: { type: Boolean, required: true, default: false },
+    review_link: { type: String, default: "" },
+    affiliate_link: { type: String, default: "" },
+    isPublished: { type: Boolean, required: true, default: false },
+    market_price: { type: Number, required: true, default: 0 },
   },
   {
     minimize: false,
   }
-);
+)
+
+// const productsSchema = new Schema(
+//   {
+//     index: { type: Number, required: true },
+//     title: {
+//       type: String,
+//       required: true,
+//       unique: true,
+//       uniqueCaseInsensitive: true,
+//     },
+//     options: {
+//       type: [
+//         {
+//           title: { type: String, required: true },
+//           bokun_code: { type: String, required: true },
+//           is_private: { type: Boolean, required: true },
+//           is_guided: { type: Boolean, required: true },
+//           pickup_included: { type: Boolean, required: true },
+//           requires_vehicle: { type: Boolean, required: true },
+//           requires_platform_entry: { type: Boolean, required: true },
+//           meeting_point_id: { type: String },
+//         },
+//       ],
+//     },
+//     platform_product_name: {
+//       required: true,
+//       type: String,
+//       unique: true,
+//       uniqueCaseInsensitive: true,
+//     },
+//     bokun_product_code: {
+//       type: String,
+//       default: "",
+//       unique: true,
+//       uniqueCaseInsensitive: true,
+//     },
+//     location: {
+//       type: {
+//         address: String,
+//         latitude: Number,
+//         longitude: Number,
+//       },
+//     },
+//     meeting_point_id: { type: String },
+//     slug: { type: String },
+//     product_images: { type: [String] },
+//     product_pictures: {
+//       type: [
+//         {
+//           url: String,
+//           caption: String,
+//           alt: String,
+//           description: String,
+//         },
+//       ],
+//     },
+//     guide_assignment_identifier: { type: String },
+//     activity_level: { type: String },
+//     additional_info: { type: [String] },
+//     special_instructions: { type: [String] },
+//     highlights: { type: [String] },
+//     product_short_description: { type: String },
+//     product_full_description: { type: String },
+//     inclusions: { type: [String] },
+//     exclusions: { type: [String] },
+//     time_slots: { type: [String], required: true },
+//     time_slots_with_range: {
+//       type: [
+//         {
+//           time_slot: String,
+//           isDefaultPickupTime: Boolean,
+//           label: String,
+//           bokun_start_time_id: String,
+//         },
+//       ],
+//     },
+//     pricing_options: { type: [String], required: true },
+//     destinations: { type: [String], required: true },
+//     tour_types: { type: [String], required: true },
+//     tour_duration: { type: String, required: true },
+//     tour_duration_type: { type: String },
+//     tour_categories: { type: [String], required: true },
+//     compatible_billing_codes: { type: Array },
+//     crewGroups: { type: [String], default: [] },
+//     crewRoles: { type: [String], default: [] },
+//     isPrivate: { type: Boolean, required: true },
+
+//     isGuided: { type: Boolean, required: true },
+//     pickupIncluded: { type: Boolean, required: true },
+//     review_link: { type: String },
+//     affiliate_link: { type: String },
+//     isPublished: { type: Boolean, required: true },
+//     market_price: { type: Number, required: true },
+//   },
+//   {
+//     minimize: false,
+//   }
+// );
 
 productsSchema.plugin(uniqueValidator, {
   message: "{PATH} {VALUE} already exists.",
-}); //https://www.npmjs.com/package/mongoose-unique-validator
+}) //https://www.npmjs.com/package/mongoose-unique-validator
 
 // Pre-save middleware to set the slug based on platform_product_name
 productsSchema.pre("save", function (next) {
   if (this.platform_product_name) {
-    this.slug = _.kebabCase(this.platform_product_name);
+    this.slug = _.kebabCase(this.platform_product_name)
   }
-  next();
-});
+  next()
+})
 
 const channelsSchema = new Schema({
   title: { type: String, required: true },
   commission_rate: { type: Number, required: true },
-});
+})
 
 const bookingSchema = new Schema(
   {
@@ -442,64 +549,64 @@ const bookingSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
-bookingSchema.plugin(mongoosastic);
-bookingSchema.plugin(mongoosePaginate);
+)
+bookingSchema.plugin(mongoosastic)
+bookingSchema.plugin(mongoosePaginate)
 
 bookingSchema.pre("findOneAndUpdate", async function (next) {
-  console.log("PRE MIDDLEWARE IN BOOKING SCHEMA");
+  console.log("PRE MIDDLEWARE IN BOOKING SCHEMA")
   try {
-    const initialValues = this.getQuery();
-    const old = await this.model.findOne(initialValues).lean(); // Using lean() to get plain JavaScript object
-    delete old.__v;
-    delete old._id;
+    const initialValues = this.getQuery()
+    const old = await this.model.findOne(initialValues).lean() // Using lean() to get plain JavaScript object
+    delete old.__v
+    delete old._id
     //delete old.pickup_location._id;
     if (old.pickup_location && old.pickup_location._id) {
-      delete old.pickup_location._id;
+      delete old.pickup_location._id
     }
-    delete old.updated_at;
-    delete old.email_history;
+    delete old.updated_at
+    delete old.email_history
 
-    const updatedValues = this.getUpdate();
+    const updatedValues = this.getUpdate()
     const updatedValuesWithExclusions = Object.keys(updatedValues).reduce(
       (obj, key) => {
         if (key !== "__v" && key !== "_id" && key !== "updated_at") {
-          obj[key] = updatedValues[key];
+          obj[key] = updatedValues[key]
         }
-        return obj;
+        return obj
       },
       {}
-    );
+    )
 
-    const differences = deepDiff(old, updatedValuesWithExclusions);
+    const differences = deepDiff(old, updatedValuesWithExclusions)
 
     if (differences) {
       const changes = differences.map((diff) => ({
         path: diff.path.join("."),
         before: diff.lhs,
         after: diff.rhs,
-      }));
+      }))
       const filter = [
         "pickup_location.__v",
         "pickup_location._id",
         "pickup_location",
-      ];
+      ]
       const filteredChanges = changes.filter(
         (change) => !filter.includes(change.path)
-      );
+      )
 
       if (Array.isArray(updatedValues.updated_at)) {
-        const lastUpdated = updatedValues.updated_at.slice(-1)[0];
-        lastUpdated.changes = filteredChanges;
+        const lastUpdated = updatedValues.updated_at.slice(-1)[0]
+        lastUpdated.changes = filteredChanges
       }
     }
 
-    next();
+    next()
   } catch (err) {
-    console.log("ERROR FROM PRE MIDDLEWARE IN BOOKING SCHEMA", err);
-    next(err);
+    console.log("ERROR FROM PRE MIDDLEWARE IN BOOKING SCHEMA", err)
+    next(err)
   }
-});
+})
 
 const tourGroupSchema = new Schema({
   product_id: String,
@@ -525,18 +632,18 @@ const tourGroupSchema = new Schema({
     default: 1,
   },
   vehicle_platform_entry: String,
-});
+})
 
 //TODO temporary //unset product when is fixed in all apps
 tourGroupSchema.pre("save", function (next) {
   if (this.product_id && !this.product) {
-    this.product = this.product_id;
+    this.product = this.product_id
   }
-  next();
-});
+  next()
+})
 
-tourGroupSchema.plugin(mongoosePaginate);
-tourGroupSchema.plugin(mongooseAggregatePaginate);
+tourGroupSchema.plugin(mongoosePaginate)
+tourGroupSchema.plugin(mongooseAggregatePaginate)
 
 const userDayScheduleSchema = new Schema(
   {
@@ -566,10 +673,10 @@ const userDayScheduleSchema = new Schema(
   {
     minimize: false,
   }
-);
+)
 
-userDayScheduleSchema.plugin(mongoosePaginate);
-userDayScheduleSchema.plugin(mongooseAggregatePaginate);
+userDayScheduleSchema.plugin(mongoosePaginate)
+userDayScheduleSchema.plugin(mongooseAggregatePaginate)
 
 const notificationSchema = new Schema({
   title: { type: String, required: true },
@@ -581,8 +688,8 @@ const notificationSchema = new Schema({
       type: { type: String, default: "" },
     },
   },
-});
-notificationSchema.plugin(mongoosePaginate);
+})
+notificationSchema.plugin(mongoosePaginate)
 
 const PwaPushSubscriptionSchema = new mongoose.Schema({
   endpoint: String,
@@ -590,12 +697,12 @@ const PwaPushSubscriptionSchema = new mongoose.Schema({
     p256dh: String,
     auth: String,
   },
-});
+})
 
 const taskGuestSchema = new Schema({
   name: { type: String, default: "" },
   count: { type: Number, default: 1 },
-});
+})
 
 const pickupSchema = new Schema({
   meeting_point: String,
@@ -604,7 +711,7 @@ const pickupSchema = new Schema({
   lat: String,
   lon: String,
   guests: [taskGuestSchema],
-});
+})
 
 const scheduleTaskSchema = new Schema(
   {
@@ -620,10 +727,10 @@ const scheduleTaskSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 
-scheduleTaskSchema.plugin(mongoosePaginate);
-scheduleTaskSchema.plugin(mongooseAggregatePaginate);
+scheduleTaskSchema.plugin(mongoosePaginate)
+scheduleTaskSchema.plugin(mongooseAggregatePaginate)
 
 const taskSchema = new Schema(
   {
@@ -641,18 +748,18 @@ const taskSchema = new Schema(
     minimize: false,
     //allows to save empty objects in db
   }
-);
+)
 
-taskSchema.plugin(mongoosePaginate);
-taskSchema.plugin(mongooseAggregatePaginate);
+taskSchema.plugin(mongoosePaginate)
+taskSchema.plugin(mongooseAggregatePaginate)
 
 const todoSchema = new Schema({
   body: { type: String, required: true },
   date: { type: String, required: true },
   author: { type: String, required: true },
   completedBy: { type: String, default: null },
-});
-todoSchema.plugin(mongoosePaginate);
+})
+todoSchema.plugin(mongoosePaginate)
 
 const noteSchema = new Schema({
   body: { type: String, required: true },
@@ -664,9 +771,9 @@ const noteSchema = new Schema({
   pinned: { type: Boolean, default: false },
   public: { type: Boolean, default: false },
   done: { type: Boolean, default: false },
-});
-noteSchema.plugin(mongoosePaginate);
-noteSchema.plugin(mongooseAggregatePaginate);
+})
+noteSchema.plugin(mongoosePaginate)
+noteSchema.plugin(mongooseAggregatePaginate)
 
 const calendarNoteSchema = new Schema({
   body: { type: String, required: true },
@@ -674,9 +781,9 @@ const calendarNoteSchema = new Schema({
   date: String,
   author_id: { type: String, required: true },
   public: { type: Boolean, default: false },
-});
-calendarNoteSchema.plugin(mongoosePaginate);
-calendarNoteSchema.plugin(mongooseAggregatePaginate);
+})
+calendarNoteSchema.plugin(mongoosePaginate)
+calendarNoteSchema.plugin(mongooseAggregatePaginate)
 
 const appVersionSchema = new Schema({
   version: { type: String, required: true },
@@ -685,19 +792,19 @@ const appVersionSchema = new Schema({
   shouldBeForcedUpdate: { type: Boolean, required: true },
   ios: Boolean,
   android: Boolean,
-});
+})
 
 const g4sTrackingSessionCredentialsSchema = new Schema({
   username: String,
   password: String,
   UserIdGuid: String,
   SessionId: String,
-});
+})
 
 const portalUserActionSchema = new Schema({
   date_time: { type: Date, default: Date.now },
   user_action: String,
-});
+})
 
 const portalUserSessionSchema = new Schema({
   date_time: { type: Date, default: Date.now },
@@ -709,9 +816,9 @@ const portalUserSessionSchema = new Schema({
   session_actions: { type: [portalUserActionSchema], default: [] },
   device_info: Object,
   sessionDurationInSeconds: Number,
-});
-portalUserSessionSchema.plugin(mongoosePaginate);
-portalUserSessionSchema.plugin(mongooseAggregatePaginate);
+})
+portalUserSessionSchema.plugin(mongoosePaginate)
+portalUserSessionSchema.plugin(mongooseAggregatePaginate)
 
 const vehicleServiceLogEntrySchema = new Schema({
   vehicle_id: String,
@@ -722,8 +829,8 @@ const vehicleServiceLogEntrySchema = new Schema({
   cost: String,
   repairs: [String],
   notes: String,
-});
-vehicleServiceLogEntrySchema.plugin(mongoosePaginate);
+})
+vehicleServiceLogEntrySchema.plugin(mongoosePaginate)
 
 const bokunDataSchema = new Schema({
   action: String,
@@ -735,12 +842,12 @@ const bokunDataSchema = new Schema({
     type: String,
     default: moment().format("YYYY-MM-DD HH:mm:ss"),
   },
-});
+})
 
 const messageDraftSchema = new Schema({
   title: String,
   body: String,
-});
+})
 
 const ticketsAvailabilitySchema = new Schema({
   place: String,
@@ -753,12 +860,12 @@ const ticketsAvailabilitySchema = new Schema({
       avail: String,
     },
   ],
-});
+})
 
 ticketsAvailabilitySchema.pre("save", function (next) {
-  this.id = this.place + this.placedate;
-  next();
-});
+  this.id = this.place + this.placedate
+  next()
+})
 
 const availabilityToolVisitorSchema = new Schema({
   ip: String,
@@ -768,7 +875,7 @@ const availabilityToolVisitorSchema = new Schema({
   longitude: String,
   region: String,
   timestamp: String,
-});
+})
 
 //------------------------- TEST FOR BALANCE FEATURE ----------------------------
 
@@ -779,7 +886,7 @@ const walletSchema = new Schema(
     balance: { type: Number, required: true },
   },
   { timestamps: true }
-);
+)
 
 const categorySchema = new Schema(
   {
@@ -787,7 +894,7 @@ const categorySchema = new Schema(
     user: { type: String, required: true },
   },
   { timestamps: true }
-);
+)
 
 const transactionSchema = new Schema(
   {
@@ -803,26 +910,26 @@ const transactionSchema = new Schema(
     description: { type: String, required: true },
   },
   { timestamps: true }
-);
+)
 
 transactionSchema.pre("save", async function (next) {
   try {
-    const wallet = await mongoose.model("wallet").findById(this.wallet);
+    const wallet = await mongoose.model("wallet").findById(this.wallet)
     if (!wallet) {
-      throw new Error("Wallet not found");
+      throw new Error("Wallet not found")
     }
 
     // Accumulate the wallet's balance
-    wallet.balance += this.amount;
+    wallet.balance += this.amount
 
     // Save the updated wallet
-    await wallet.save();
+    await wallet.save()
 
-    next();
+    next()
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+})
 
 //--------------------------------------------------------------
 
@@ -881,4 +988,4 @@ module.exports = {
   WalletModel: model("wallet", walletSchema),
   CategoryModel: model("category", categorySchema),
   TransactionModel: model("transaction", transactionSchema),
-};
+}
