@@ -512,6 +512,7 @@ const productsSchema = new Schema(
           pickup_included: { type: Boolean },
           requires_vehicle: { type: Boolean },
           requires_platform_entry: { type: Boolean },
+          description: { type: String },
           meeting_point_id: { type: String },
         },
       ],
